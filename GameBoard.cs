@@ -99,8 +99,7 @@ namespace Tetris_CMD
                         break;
 
                     case ConsoleKey.LeftArrow:
-                        //mover pra esquerda
-                        //MoveLeft(); em algum momento
+                        currentShape.ShapeMovement?.Invoke();
                         break;
 
                     case ConsoleKey.RightArrow:

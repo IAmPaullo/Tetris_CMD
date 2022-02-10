@@ -8,7 +8,7 @@ namespace Tetris_CMD
 {
     public static class TetrisShapeT
     {
-        private const int rotAlternative = 2;
+        private const int rotAlternative = 4;
         private const ConsoleColor shapeColor = ConsoleColor.White;
 
 
@@ -22,34 +22,62 @@ namespace Tetris_CMD
                     break;
 
                 case 0:
-                    return TetrisShapeIForm_0();
+                    return TetrisShapeTForm_0();
 
                 case 1:
-                    return TetrisShapeIForm_1();
+                    return TetrisShapeTForm_1();
+
+                case 2:
+                    return TetrisShapeTForm_0();
+
+                case 3:
+                    return TetrisShapeTForm_1();
             }
 
             return null;
 
         }
 
-        private static Primitives[,] TetrisShapeIForm_0()
+        private static Primitives[,] TetrisShapeTForm_0()
         {
             Primitives[,] result = new Primitives[4, 4];
-            result[0, 1] = new Primitives(shapeColor);
             result[1, 1] = new Primitives(shapeColor);
+            result[2, 0] = new Primitives(shapeColor);
             result[2, 1] = new Primitives(shapeColor);
+            result[2, 2] = new Primitives(shapeColor);
+
+            return result;
+        }
+
+        private static Primitives[,] TetrisShapeTForm_1()
+        {
+            Primitives[,] result = new Primitives[4, 4];
+            result[1, 0] = new Primitives(shapeColor);
+            result[2, 1] = new Primitives(shapeColor);
+            result[2, 2] = new Primitives(shapeColor);
             result[3, 1] = new Primitives(shapeColor);
 
             return result;
         }
 
-        private static Primitives[,] TetrisShapeIForm_1()
+        private static Primitives[,] TetrisShapeTForm_2()
         {
             Primitives[,] result = new Primitives[4, 4];
             result[1, 0] = new Primitives(shapeColor);
+            result[2, 1] = new Primitives(shapeColor);
+            result[2, 2] = new Primitives(shapeColor);
+            result[3, 1] = new Primitives(shapeColor);
+
+            return result;
+        }
+
+        private static Primitives[,] TetrisShapeTForm_3()
+        {
+            Primitives[,] result = new Primitives[4, 4];
             result[1, 1] = new Primitives(shapeColor);
-            result[1, 2] = new Primitives(shapeColor);
-            result[1, 3] = new Primitives(shapeColor);
+            result[2, 0] = new Primitives(shapeColor);
+            result[2, 1] = new Primitives(shapeColor);
+            result[3, 1] = new Primitives(shapeColor);
 
             return result;
         }

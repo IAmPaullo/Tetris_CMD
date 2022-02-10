@@ -80,5 +80,10 @@ namespace Tetris_CMD
                 }
             }
         }
+
+        public void MoveLeft() { left--; }
+        public void MoveRight() { left--; }
+        public void MoveDown() { left--; }
+
     }
 }

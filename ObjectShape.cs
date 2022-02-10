@@ -15,15 +15,25 @@ namespace Tetris_CMD
         private Grid boardGrid;
         public enum TetrisShape { I, J, L, O, S, T, Z };
         private TetrisShape type;
+        public Action ShapeMovement;
 
 
 
         public ObjectShape(Grid boardGrid, TetrisShape type)
         {
+            AssignAction();
             this.boardGrid = boardGrid;
             this.type = type;
             //grid = new Grid(boardGrid.TopValue - 3, boardGrid.LeftValue + 3, NewObjectShape(type, rot));
             topPos = grid.TopValue;
+        }
+
+        public void AssignAction()
+        {
+            ShapeMovement += grid.MoveDown;
+            ShapeMovement += grid.MoveDown;
+            ShapeMovement += grid.MoveDown;
+
         }
 
         public bool ReturnIsDestroyed { get { return isDestroyed; } }
@@ -50,26 +60,46 @@ namespace Tetris_CMD
                     return TetrisShapeI.CreateShape(rot);
                     
                 case TetrisShape.J:
-                    //
-                    break;
+                    return TetrisShapeJ.CreateShape(rot);
+                    
+
                 case TetrisShape.L:
-                    //
-                    break;
+                    return TetrisShapeL.CreateShape(rot);
+                    
+
                 case TetrisShape.O:
-                    //
-                    break;
+                    return TetrisShapeO.CreateShape(rot);
+                    
+
                 case TetrisShape.S:
-                    //
-                    break;
+                    return TetrisShapeS.CreateShape(rot);
+                    
+
                 case TetrisShape.T:
-                    //
-                    break;
+                    return TetrisShapeT.CreateShape(rot);
+                    
 
                 case TetrisShape.Z:
-                    //
-                    break;
+                    return TetrisShapeZ.CreateShape(rot);
+                    
             }
             return null;
+        }
+
+
+        public void MovePieceLeft()
+        {
+            grid.MoveLeft();
+        }
+
+        public void MovePieceRight()
+        {
+            grid.MoveRight();
+        }
+
+        public void MovePieceDown()
+        {
+            grid.MoveDown();
         }
 
 
