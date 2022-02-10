@@ -33,7 +33,7 @@ namespace Tetris_CMD
 
 
 
-        public void GetKeyInput()
+        public void GetKeyInputAndMovePieces()
         {
             ConsoleKey consoleKey;
 
@@ -52,7 +52,7 @@ namespace Tetris_CMD
                         break;
 
                     case ConsoleKey.RightArrow:
-
+                        Console.WriteLine(Console.KeyAvailable);
                         break;
 
                     case ConsoleKey.DownArrow:

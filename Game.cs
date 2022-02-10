@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
+
 
 namespace Tetris_CMD
 {
@@ -12,11 +13,19 @@ namespace Tetris_CMD
         private const int gameLoopTime = 60;
         private GameBoard gameBoard = new GameBoard();
         
+        
         public void Awake()
         {
             Console.Title = windowTitle;
 
             gameBoard.DrawBoard();
+
+            while (!gameBoard.GameHasFinished())
+            {
+                gameBoard.GetKeyInputAndMovePieces();
+               
+                Thread.Sleep(gameLoopTime);
+            }
         }
         
     }
