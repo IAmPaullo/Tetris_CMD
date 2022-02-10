@@ -30,6 +30,58 @@ namespace Tetris_CMD
         {
             return isFinished;
         }
+        public void DrawBoard()
+        {
+            Console.Clear();
+            DrawBorder();
+            levelGrid.DrawGA();
+
+        }
+
+
+        private static void DrawGameBox(int x, int y, int width, int height, bool isDoubleLine)
+        {
+            string singleLine = "////\\\\";
+            string doubleLine = "*1*'**";
+            string setString = isDoubleLine ? doubleLine : singleLine;
+
+
+            Console.SetCursorPosition(x, y);
+            Console.Write(setString[0]);
+
+            for (int column = 0; column < width; column++)
+            {
+                Console.Write(setString[1]);
+            }
+
+            Console.Write(setString[2]);
+
+            int xSize = x + width - 1;
+            int ySize = y + 1;
+
+            for (int row = 0; row < height - 2; row++, ySize++)
+            {
+                Console.SetCursorPosition(x, ySize);
+                Console.Write(setString[3]);
+
+                Console.SetCursorPosition(xSize, ySize);
+                Console.Write(setString[3]);
+            }
+
+            ySize = y + height - 1;
+
+            Console.SetCursorPosition(x, ySize);
+            Console.Write(setString[4]);
+
+
+            for (int column = 0; column < width - 2; column++)
+            {
+                Console.Write(setString[1]);
+            }
+
+            Console.Write(setString[5]);
+
+        }
 
 
 
@@ -67,62 +119,15 @@ namespace Tetris_CMD
 
         }
 
-        public void DrawBoard()
-        {
-            Console.Clear();
-            DrawBorder();
-
-        }
-
-
-        private static void DrawGameBox(int x, int y, int width, int height, bool isDoubleLine)
-        {
-            string singleLine = "////\\\\";
-            string doubleLine = "*1*3**";
-            string setString = isDoubleLine ? doubleLine : singleLine;
-
-
-            Console.SetCursorPosition(x, y);
-            Console.Write(setString[0]);
-
-            for (int column = 0; column < width; column++)
-            {
-                Console.Write(setString[1]);
-            }
-
-            Console.Write(setString[2]);
-
-            int xSize = x + width - 1;
-            int ySize = y + 1;
-
-            for (int row = 0; row < height; row++)
-            {
-                Console.SetCursorPosition(x, ySize);
-                Console.Write(setString[3]);
-            }
-
-            ySize = y + height - 1;
-
-            Console.SetCursorPosition(x, ySize);
-            Console.Write(setString[4]);
-
-
-            for (int column = 0; column < width; column++)
-            {
-                Console.Write(setString[1]);
-            }
-
-            Console.Write(setString[5]);
-
-        }
 
         private void DrawBorder()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            
+            DrawGameBox(levelGrid.LeftValue - 1, levelGrid.TopValue - 1,
+                boardWidth + 2, boardHeight + 2, true);
 
-            DrawGameBox(levelGrid.LeftValue + levelGrid.ColumnsValue + 2,
-                levelGrid.TopValue + levelGrid.RowValue / 2 - 3, 10, 10, false);
+            //DrawGameBox(levelGrid.LeftValue + levelGrid.ColumnsValue + 2,
+            //    levelGrid.TopValue + levelGrid.RowValue / 2 - 3, 10, 10, false);
         }
 
         public void UpdateGameLoop()

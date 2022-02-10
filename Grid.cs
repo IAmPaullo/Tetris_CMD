@@ -37,6 +37,19 @@ namespace Tetris_CMD
         {
             return gameArea;
         }
+        public void DrawGA()
+        {
+            for (int row = 0; row < RowValue; row++)
+            {
+                for (int column = 0; column < ColumnsValue; column++)
+                {
+                    if (gameArea[row, column] != null)
+                    {
+                        gameArea[row, column].DrawGameArea(column + LeftValue, row + TopValue);
+                    }
+                }
+            }
+        }
 
         public void DrawGA(Grid grid)
         {
@@ -54,8 +67,18 @@ namespace Tetris_CMD
             }
         }
 
-
-
-
+        public void DrawShape(int x, int y)
+        {
+            for (int row = 0; row < RowValue; row++)
+            {
+                for (int column = 0; column < ColumnsValue; column++)
+                {
+                    if (gameArea[row,column] != null)
+                    {
+                        gameArea[row, column].DrawGameArea(column + x, row + y);
+                    }
+                }
+            }
+        }
     }
 }
