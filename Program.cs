@@ -7,7 +7,7 @@ namespace Tetris_CMD
         static void Main(string[] args)
         {
             Game game = new Game();
-            game.Start();
+            game.Awake();
         }
     }
 }
