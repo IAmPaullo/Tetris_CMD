@@ -24,8 +24,10 @@ namespace Tetris_CMD
             {
                 gameBoard.GetKeyInputAndMovePieces();
                 gameBoard.DrawBoard();
-               
-                Thread.Sleep(gameLoopTime);
+
+                Console.ReadKey();
+
+                //Thread.Sleep(gameLoopTime);
             }
         }
         

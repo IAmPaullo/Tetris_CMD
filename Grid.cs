@@ -10,7 +10,7 @@ namespace Tetris_CMD
     {
         private int columns, rows;
         private int top, left;
-        private GameArea[,] gameArea;
+        private Primitives[,] gameArea;
 
 
         public int TopValue { get { return top; } }
@@ -25,15 +25,15 @@ namespace Tetris_CMD
             this.rows = rows;
             this.top = top;
             this.left = left;
-            gameArea = new GameArea[rows, columns];
+            gameArea = new Primitives[rows, columns];
         }
 
-        public void DefineGameArea(GameArea[,] gameArea)
+        public void DefineGameArea(Primitives[,] gameArea)
         {
             this.gameArea = gameArea;
         }
 
-        public GameArea[,] GetGameArea()
+        public Primitives[,] GetGameArea()
         {
             return gameArea;
         }
@@ -45,7 +45,7 @@ namespace Tetris_CMD
                 {
                     if (gameArea[row, column] != null)
                     {
-                        gameArea[row, column].DrawGameArea(column + LeftValue, row + TopValue);
+                        gameArea[row, column].DrawPrimitive(column + LeftValue, row + TopValue);
                     }
                 }
             }
@@ -60,7 +60,7 @@ namespace Tetris_CMD
                     if (gameArea[row, column] != null)
                     {
                         if (row + TopValue - grid.TopValue >= 0)
-                            gameArea[row, column].DrawGameArea(column + LeftValue,
+                            gameArea[row, column].DrawPrimitive(column + LeftValue,
                                 row + TopValue);
                     }
                 }
@@ -75,7 +75,7 @@ namespace Tetris_CMD
                 {
                     if (gameArea[row,column] != null)
                     {
-                        gameArea[row, column].DrawGameArea(column + x, row + y);
+                        gameArea[row, column].DrawPrimitive(column + x, row + y);
                     }
                 }
             }

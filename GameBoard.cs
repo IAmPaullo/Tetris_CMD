@@ -16,7 +16,7 @@ namespace Tetris_CMD
         private int lines = 0;
         private int score = 0;
         private int level = 0;
-        private float dropSpeed;
+        private float speed;
         private bool isFinished = false;
         private Grid levelGrid;
         private ObjectShape currentShape, nextShape;
@@ -42,7 +42,7 @@ namespace Tetris_CMD
         private static void DrawGameBox(int x, int y, int width, int height, bool isDoubleLine)
         {
             string singleLine = "////\\\\";
-            string doubleLine = "*1*'**";
+            string doubleLine = "*ඞ*" + "\u0D9E" +"****";
             string setString = isDoubleLine ? doubleLine : singleLine;
 
 
@@ -130,10 +130,6 @@ namespace Tetris_CMD
             //    levelGrid.TopValue + levelGrid.RowValue / 2 - 3, 10, 10, false);
         }
 
-        public void UpdateGameLoop()
-        {
-
-        }
 
     }
 }

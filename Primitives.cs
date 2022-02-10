@@ -2,16 +2,16 @@
 
 namespace Tetris_CMD
 {
-    public class GameArea
+    public class Primitives
     {
         ConsoleColor color;
 
-        public GameArea(ConsoleColor color)
+        public Primitives(ConsoleColor color)
         {
             this.color = color;
         }
 
-        public void DrawGameArea(int x, int y)
+        public void DrawPrimitive(int x, int y)
         {
             if (y >= Console.WindowHeight || y < 0) return;
 

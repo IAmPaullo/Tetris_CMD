@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Tetris_CMD
 {
@@ -6,6 +7,8 @@ namespace Tetris_CMD
     {
         static void Main(string[] args)
         {
+
+            Console.OutputEncoding = Encoding.UTF8;
             Game game = new Game();
             game.Awake();
         }
