@@ -37,7 +37,7 @@ namespace Tetris_CMD
         {
             return gameArea;
         }
-        public void DrawGA()
+        public void DrawArea()
         {
             for (int row = 0; row < RowValue; row++)
             {
@@ -51,7 +51,7 @@ namespace Tetris_CMD
             }
         }
 
-        public void DrawGA(Grid grid)
+        public void DrawArea(Grid grid)
         {
             for (int row = 0; row < RowValue; row++)
             {

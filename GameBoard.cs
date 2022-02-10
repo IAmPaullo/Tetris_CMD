@@ -34,7 +34,7 @@ namespace Tetris_CMD
         {
             Console.Clear();
             DrawBorder();
-            levelGrid.DrawGA();
+            levelGrid.DrawArea();
 
         }
 
