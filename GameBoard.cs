@@ -8,7 +8,7 @@ namespace Tetris_CMD
 {
     public class GameBoard
     {
-        public const int boardHeight = 40;
+        public const int boardHeight = 20;
         public const int boardWidth = 20;
 
         private int linesPerLvlAmount = 10;
@@ -122,7 +122,7 @@ namespace Tetris_CMD
 
         private void DrawBorder()
         {
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.Blue;
             DrawGameBox(levelGrid.LeftValue - 1, levelGrid.TopValue - 1,
                 boardWidth + 2, boardHeight + 2, true);
 
