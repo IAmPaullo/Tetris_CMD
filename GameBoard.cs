@@ -22,9 +22,16 @@ namespace Tetris_CMD
         private ObjectShape currentShape, nextShape;
 
 
+        private Random randValue = new Random();
+
         public GameBoard(int top, int left)
         {
             levelGrid = new Grid(top, left, boardHeight, boardWidth);
+            currentShape = new ObjectShape(levelGrid,
+                (ObjectShape.TetrisShape)(randValue.Next(0, shapeAmount)));
+
+            nextShape = new ObjectShape(levelGrid,
+                (ObjectShape.TetrisShape)(randValue.Next(0, shapeAmount)));
         }
         public bool GameHasFinished()
         {
@@ -38,6 +45,10 @@ namespace Tetris_CMD
 
         }
 
+        public void UpdateGameLoop()
+        {
+
+        }
 
         private static void DrawGameBox(int x, int y, int width, int height, bool isDoubleLine)
         {
@@ -80,41 +91,6 @@ namespace Tetris_CMD
             }
 
             Console.Write(setString[5]);
-
-        }
-
-
-
-        public void GetKeyInputAndMovePieces()
-        {
-            ConsoleKey consoleKey;
-
-            if (Console.KeyAvailable)
-            {
-                consoleKey = Console.ReadKey().Key;
-
-                switch (consoleKey)
-                {
-                    default:
-                        break;
-
-                    case ConsoleKey.LeftArrow:
-                        currentShape.ShapeMovement?.Invoke();
-                        break;
-
-                    case ConsoleKey.RightArrow:
-                        Console.WriteLine(Console.KeyAvailable);
-                        break;
-
-                    case ConsoleKey.DownArrow:
-
-                        break;
-
-                    case ConsoleKey.Spacebar:
-
-                        break;
-                }
-            }
 
         }
 
