@@ -28,6 +28,32 @@ namespace Tetris_CMD
             gameArea = new GameArea[rows, columns];
         }
 
+        public void DefineGameArea(GameArea[,] gameArea)
+        {
+            this.gameArea = gameArea;
+        }
+
+        public GameArea[,] GetGameArea()
+        {
+            return gameArea;
+        }
+
+        public void DrawGA(Grid grid)
+        {
+            for (int row = 0; row < RowValue; row++)
+            {
+                for (int column = 0; column < ColumnsValue; column++)
+                {
+                    if (gameArea[row, column] != null)
+                    {
+                        if (row + TopValue - grid.TopValue >= 0)
+                            gameArea[row, column].DrawGameArea(column + LeftValue,
+                                row + TopValue);
+                    }
+                }
+            }
+        }
+
 
 
 

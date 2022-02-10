@@ -10,8 +10,8 @@ namespace Tetris_CMD
     class Game
     {
         private const string windowTitle = "Tetris CMD";
-        private const int gameLoopTime = 60;
-        private GameBoard gameBoard = new GameBoard();
+        private const int gameLoopTime = 1000;
+        private GameBoard gameBoard = new GameBoard(3, Console.WindowWidth / 2 - 5);
         
         
         public void Awake()
@@ -23,6 +23,7 @@ namespace Tetris_CMD
             while (!gameBoard.GameHasFinished())
             {
                 gameBoard.GetKeyInputAndMovePieces();
+                gameBoard.DrawBoard();
                
                 Thread.Sleep(gameLoopTime);
             }

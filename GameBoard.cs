@@ -22,9 +22,9 @@ namespace Tetris_CMD
         private ObjectShape currentShape, nextShape;
 
 
-        public GameBoard()
+        public GameBoard(int top, int left)
         {
-
+            levelGrid = new Grid(top, left, boardHeight, boardWidth);
         }
         public bool GameHasFinished()
         {
@@ -70,15 +70,59 @@ namespace Tetris_CMD
         public void DrawBoard()
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Blue;
-            //levelGrid.Draw();
+            DrawBorder();
+
+        }
+
+
+        private static void DrawGameBox(int x, int y, int width, int height, bool isDoubleLine)
+        {
+            string singleLine = "////\\\\";
+            string doubleLine = "*1*3**";
+            string setString = isDoubleLine ? doubleLine : singleLine;
+
+
+            Console.SetCursorPosition(x, y);
+            Console.Write(setString[0]);
+
+            for (int column = 0; column < width; column++)
+            {
+                Console.Write(setString[1]);
+            }
+
+            Console.Write(setString[2]);
+
+            int xSize = x + width - 1;
+            int ySize = y + 1;
+
+            for (int row = 0; row < height; row++)
+            {
+                Console.SetCursorPosition(x, ySize);
+                Console.Write(setString[3]);
+            }
+
+            ySize = y + height - 1;
+
+            Console.SetCursorPosition(x, ySize);
+            Console.Write(setString[4]);
+
+
+            for (int column = 0; column < width; column++)
+            {
+                Console.Write(setString[1]);
+            }
+
+            Console.Write(setString[5]);
 
         }
 
         private void DrawBorder()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            //Desenhar uma caixa aqui?
+            
+
+            DrawGameBox(levelGrid.LeftValue + levelGrid.ColumnsValue + 2,
+                levelGrid.TopValue + levelGrid.RowValue / 2 - 3, 10, 10, false);
         }
 
         public void UpdateGameLoop()
