@@ -28,13 +28,7 @@ namespace Tetris_CMD
             topPos = grid.TopValue;
         }
 
-        //public void AssignAction()
-        //{
-        //    ShapeMovement += grid.MoveDown;
-        //    ShapeMovement += grid.MoveDown;
-        //    ShapeMovement += grid.MoveDown;
 
-        //}
 
         public bool ReturnIsDestroyed { get { return isDestroyed; } }
         public Grid ReturnGrid { get { return grid; } }
@@ -63,30 +57,30 @@ namespace Tetris_CMD
 
                 case TetrisShape.I:
                     return TetrisShapeI.CreateShape(rot);
-                    
+
                 case TetrisShape.J:
                     return TetrisShapeJ.CreateShape(rot);
-                    
+
 
                 case TetrisShape.L:
                     return TetrisShapeL.CreateShape(rot);
-                    
+
 
                 case TetrisShape.O:
                     return TetrisShapeO.CreateShape(rot);
-                    
+
 
                 case TetrisShape.S:
                     return TetrisShapeS.CreateShape(rot);
-                    
+
 
                 case TetrisShape.T:
                     return TetrisShapeT.CreateShape(rot);
-                    
+
 
                 case TetrisShape.Z:
                     return TetrisShapeZ.CreateShape(rot);
-                    
+
             }
             return null;
         }
@@ -94,17 +88,26 @@ namespace Tetris_CMD
 
         public void MovePieceLeft()
         {
-            grid.MoveLeft();
+            if (!ColliderHandler.isColliding(boardGrid, grid, -1, 0))
+                grid.MoveLeft();
         }
 
         public void MovePieceRight()
         {
-            grid.MoveRight();
+            if (!ColliderHandler.isColliding(boardGrid, grid, 1, 0))
+                grid.MoveRight();
         }
 
         public void MovePieceDown()
         {
-            grid.MoveDown();
+            if (!ColliderHandler.isColliding(boardGrid, grid, 0, 1))
+            {
+                grid.MoveDown();
+            }
+            else
+            {
+                isDestroyed = true;
+            }
         }
 
         public void MoveDownByTime(float speed)
@@ -113,8 +116,14 @@ namespace Tetris_CMD
 
             if ((int)(topPos + speed) > (int)topPos)
             {
-                grid.MoveDown();
-                
+                if (!ColliderHandler.isColliding(boardGrid, grid, 0, 1))
+                {
+                    grid.MoveDown();
+                }
+                else
+                {
+                    isDestroyed = true;
+                }
             }
         }
 
