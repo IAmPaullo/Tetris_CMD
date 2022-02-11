@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 namespace Tetris_CMD
 {
     public class Primitives
@@ -19,7 +20,9 @@ namespace Tetris_CMD
 
             Console.ForegroundColor = color;
             Console.SetCursorPosition(x, y);
-            Console.Write('ඞ');
+            Console.Write('♥');
+            //Console.Write('↕')
+            
 
         }
 

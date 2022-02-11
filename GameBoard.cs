@@ -9,7 +9,7 @@ namespace Tetris_CMD
     public class GameBoard
     {
         public const int boardHeight = 20;
-        public const int boardWidth = 10;
+        public const int boardWidth = 20;
 
         private int linesPerLvlAmount = 10;
         private int shapeAmount = 7;
@@ -59,17 +59,17 @@ namespace Tetris_CMD
             currentShape.MoveDownByTime(speed);
         }
 
-        private static void DrawGameBox(int x, int y, int width, int height, bool isDoubleLine)
+        private static void DrawGameBox(int x, int y, int width, int height)
         {
-            string singleLine = "////\\\\";
-            string doubleLine = "*ඞ*" + "\u0D9E" + "****";
-            string setString = isDoubleLine ? doubleLine : singleLine;
+            
+            string stringCharToUse = "┌━┐│└┘";
+            string setString = stringCharToUse;
 
 
             Console.SetCursorPosition(x, y);
             Console.Write(setString[0]);
 
-            for (int column = 0; column < width; column++)
+            for (int column = 0; column < width - 2; column++)
             {
                 Console.Write(setString[1]);
             }
@@ -108,7 +108,7 @@ namespace Tetris_CMD
         {
             Console.ForegroundColor = ConsoleColor.Blue;
             DrawGameBox(levelGrid.LeftValue - 1, levelGrid.TopValue - 1,
-                boardWidth + 2, boardHeight + 2, true);
+                boardWidth + 2, boardHeight + 2);
 
             //DrawGameBox(levelGrid.LeftValue + levelGrid.ColumnsValue + 2,
             //    levelGrid.TopValue + levelGrid.RowValue / 2 - 3, 10, 10, false);

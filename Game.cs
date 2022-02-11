@@ -17,7 +17,10 @@ namespace Tetris_CMD
         
         public void Awake()
         {
+            Console.OutputEncoding = Encoding.Unicode;
             Console.Title = windowTitle;
+            Console.BufferHeight = Console.WindowHeight + 50;
+            Console.BufferWidth = Console.WindowWidth + 50;
 
             gameBoard.DrawBoard();
 
