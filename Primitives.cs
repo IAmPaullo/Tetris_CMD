@@ -18,6 +18,7 @@ namespace Tetris_CMD
             if (x >= Console.WindowWidth || x < 0) return;
 
             Console.ForegroundColor = color;
+            Console.SetCursorPosition(x, y);
             Console.Write('ඞ');
 
         }

@@ -15,26 +15,26 @@ namespace Tetris_CMD
         private Grid boardGrid;
         public enum TetrisShape { I, J, L, O, S, T, Z };
         private TetrisShape type;
-        public Action ShapeMovement;
+        //public Action ShapeMovement;
 
 
 
         public ObjectShape(Grid boardGrid, TetrisShape type)
         {
-            AssignAction();
+            //AssignAction();
             this.boardGrid = boardGrid;
             this.type = type;
-            //grid = new Grid(boardGrid.TopValue - 3, boardGrid.LeftValue + 3, NewObjectShape(type, rot));
+            grid = new Grid(boardGrid.TopValue - 3, boardGrid.LeftValue + 3, NewObjectShape(type, rot));
             topPos = grid.TopValue;
         }
 
-        public void AssignAction()
-        {
-            ShapeMovement += grid.MoveDown;
-            ShapeMovement += grid.MoveDown;
-            ShapeMovement += grid.MoveDown;
+        //public void AssignAction()
+        //{
+        //    ShapeMovement += grid.MoveDown;
+        //    ShapeMovement += grid.MoveDown;
+        //    ShapeMovement += grid.MoveDown;
 
-        }
+        //}
 
         public bool ReturnIsDestroyed { get { return isDestroyed; } }
         public Grid ReturnGrid { get { return grid; } }
@@ -46,6 +46,11 @@ namespace Tetris_CMD
         public void Draw(int x, int y)
         {
             grid.DrawShape(x, y);
+        }
+
+        public void Draw(Grid rect)
+        {
+            grid.DrawArea(rect);
         }
 
 
@@ -100,6 +105,17 @@ namespace Tetris_CMD
         public void MovePieceDown()
         {
             grid.MoveDown();
+        }
+
+        public void MoveDownByTime(float speed)
+        {
+            topPos += speed;
+
+            if ((int)(topPos + speed) > (int)topPos)
+            {
+                grid.MoveDown();
+                
+            }
         }
 
 

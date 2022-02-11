@@ -9,14 +9,14 @@ namespace Tetris_CMD
     public class GameBoard
     {
         public const int boardHeight = 20;
-        public const int boardWidth = 20;
+        public const int boardWidth = 10;
 
         private int linesPerLvlAmount = 10;
         private int shapeAmount = 7;
         private int lines = 0;
         private int score = 0;
         private int level = 0;
-        private float speed;
+        private float speed = 10f;
         private bool isFinished = false;
         private Grid levelGrid;
         private ObjectShape currentShape, nextShape;
@@ -42,18 +42,27 @@ namespace Tetris_CMD
             Console.Clear();
             DrawBorder();
             levelGrid.DrawArea();
+            currentShape.Draw(levelGrid);
 
         }
 
         public void UpdateGameLoop()
         {
 
+            if (currentShape.ReturnIsDestroyed)
+            {
+                levelGrid.AssignPieceAndGrid(currentShape.ReturnGrid);
+                currentShape = nextShape;
+                nextShape = new ObjectShape(levelGrid,
+                    (ObjectShape.TetrisShape)(randValue.Next(0, shapeAmount)));
+            }
+            currentShape.MoveDownByTime(speed);
         }
 
         private static void DrawGameBox(int x, int y, int width, int height, bool isDoubleLine)
         {
             string singleLine = "////\\\\";
-            string doubleLine = "*ඞ*" + "\u0D9E" +"****";
+            string doubleLine = "*ඞ*" + "\u0D9E" + "****";
             string setString = isDoubleLine ? doubleLine : singleLine;
 
 

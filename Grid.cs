@@ -10,13 +10,18 @@ namespace Tetris_CMD
     {
         private int columns, rows;
         private int top, left;
-        private Primitives[,] gameArea;
+        private Primitives[,] pieceCellArea;
 
 
         public int TopValue { get { return top; } }
         public int LeftValue { get { return left; } }
         public int ColumnsValue { get { return columns; } }
         public int RowValue { get { return rows; } }
+
+        public void MoveLeft() { left--; }
+        public void MoveRight() { left++; }
+        public void MoveDown() { top++; }
+
 
 
         public Grid(int top, int left, int columns, int rows)
@@ -25,17 +30,36 @@ namespace Tetris_CMD
             this.rows = rows;
             this.top = top;
             this.left = left;
-            gameArea = new Primitives[rows, columns];
+            pieceCellArea = new Primitives[rows, columns];
         }
 
-        public void DefineGameArea(Primitives[,] gameArea)
+        public Grid(int top, int left, Primitives[,] pieceCellArea)
         {
-            this.gameArea = gameArea;
+            columns = pieceCellArea.GetLength(0);
+            rows = pieceCellArea.GetLength(1);
+            this.top = top;
+            this.left = left;
+            this.pieceCellArea = pieceCellArea;
         }
 
-        public Primitives[,] GetGameArea()
+        public Grid(Grid grid, Primitives[,] pieceCellArea)
         {
-            return gameArea;
+            rows = grid.RowValue;
+            columns = grid.ColumnsValue;
+            top = grid.TopValue;
+            left = grid.LeftValue;
+            this.pieceCellArea = pieceCellArea;
+        }
+
+
+        public void DefineGameArea(Primitives[,] pieceCellArea)
+        {
+            this.pieceCellArea = pieceCellArea;
+        }
+
+        public Primitives[,] GetPieceCellArea()
+        {
+            return pieceCellArea;
         }
         public void DrawArea()
         {
@@ -43,9 +67,9 @@ namespace Tetris_CMD
             {
                 for (int column = 0; column < ColumnsValue; column++)
                 {
-                    if (gameArea[row, column] != null)
+                    if (pieceCellArea[row, column] != null)
                     {
-                        gameArea[row, column].DrawPrimitive(column + LeftValue, row + TopValue);
+                        pieceCellArea[row, column].DrawPrimitive(column + LeftValue, row + TopValue);
                     }
                 }
             }
@@ -57,10 +81,10 @@ namespace Tetris_CMD
             {
                 for (int column = 0; column < ColumnsValue; column++)
                 {
-                    if (gameArea[row, column] != null)
+                    if (pieceCellArea[row, column] != null)
                     {
                         if (row + TopValue - grid.TopValue >= 0)
-                            gameArea[row, column].DrawPrimitive(column + LeftValue,
+                            pieceCellArea[row, column].DrawPrimitive(column + LeftValue,
                                 row + TopValue);
                     }
                 }
@@ -73,17 +97,33 @@ namespace Tetris_CMD
             {
                 for (int column = 0; column < ColumnsValue; column++)
                 {
-                    if (gameArea[row,column] != null)
+                    if (pieceCellArea[row, column] != null)
                     {
-                        gameArea[row, column].DrawPrimitive(column + x, row + y);
+                        pieceCellArea[row, column].DrawPrimitive(column + x, row + y);
                     }
                 }
             }
         }
 
-        public void MoveLeft() { left--; }
-        public void MoveRight() { left--; }
-        public void MoveDown() { left--; }
+        public void AssignPieceAndGrid(Grid g)
+        {
+            if (g.RowValue > RowValue || g.ColumnsValue > ColumnsValue) return;
+
+            for (int row = 0; row < g.RowValue; row++)
+            {
+                for (int col = 0; col < g.ColumnsValue; col++)
+                {
+                    if (g.pieceCellArea[row, col] != null)
+                    {
+                        pieceCellArea[row + g.TopValue - TopValue, col + g.LeftValue - LeftValue] =
+                            g.pieceCellArea[row, col];
+
+                    }
+                }
+            }
+
+
+        }
 
     }
 }
