@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Tetris_CMD
 {
-    class ColliderHandler
+    public static class ColliderHandler
     {
-        public static bool isColliding(Grid board, Grid obj, int topBuffer, int leftBuffer)
+        public static bool isColliding(Grid board, Grid obj, int topBuffer = 0, int leftBuffer = 0)
         {
             for (int row = 0; row < obj.RowValue; row++)
             {

@@ -26,7 +26,7 @@ namespace Tetris_CMD
 
             while (!gameBoard.GameHasFinished())
             {
-                movement.GetKeyInputAndMovePieces();
+                gameBoard.GetKeyInputAndMovePieces();
                 gameBoard.UpdateGameLoop();
                 gameBoard.DrawBoard();
 

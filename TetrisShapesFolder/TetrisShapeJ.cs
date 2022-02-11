@@ -14,37 +14,25 @@ namespace Tetris_CMD
 
         public static Primitives[,] CreateShape(int rot)
         {
-            rot = rot % rotAlternative;
+            rot %= rotAlternative;
 
-            switch (rot)
+            return rot switch
             {
-                default:
-                    break;
-
-                case 0:
-                    return TetrisShapeJForm_0();
-
-                case 1:
-                    return TetrisShapeJForm_1();
-
-                case 2:
-                    return TetrisShapeJForm_2();
-
-                case 3:
-                    return TetrisShapeJForm_3();
-            }
-
-            return null;
-
+                0 => TetrisShapeJForm_0(),
+                1 => TetrisShapeJForm_1(),
+                2 => TetrisShapeJForm_2(),
+                3 => TetrisShapeJForm_3(),
+                _ => null,
+            };
         }
 
         private static Primitives[,] TetrisShapeJForm_0()
         {
             Primitives[,] result = new Primitives[4, 4];
-            result[0, 1] = new Primitives(shapeColor);
-            result[1, 1] = new Primitives(shapeColor);
+            result[0, 2] = new Primitives(shapeColor);
+            result[1, 2] = new Primitives(shapeColor);
+            result[2, 2] = new Primitives(shapeColor);
             result[2, 1] = new Primitives(shapeColor);
-            result[3, 1] = new Primitives(shapeColor);
 
             return result;
         }
@@ -52,7 +40,7 @@ namespace Tetris_CMD
         private static Primitives[,] TetrisShapeJForm_1()
         {
             Primitives[,] result = new Primitives[4, 4];
-            result[1, 0] = new Primitives(shapeColor);
+            result[1, 1] = new Primitives(shapeColor);
             result[1, 1] = new Primitives(shapeColor);
             result[1, 2] = new Primitives(shapeColor);
             result[1, 3] = new Primitives(shapeColor);

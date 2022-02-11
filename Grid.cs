@@ -105,25 +105,34 @@ namespace Tetris_CMD
             }
         }
 
-        public void AssignPieceAndGrid(Grid grid)
+        //public void AssignPieceAndGrid(Grid grid)
+        //{
+        //    if (grid.RowValue > RowValue || grid.ColumnsValue > ColumnsValue) return;
+
+        //    for (int row = 0; row < grid.RowValue; row++)
+        //    {
+        //        for (int col = 0; col < grid.ColumnsValue; col++)
+        //        {
+        //            if (grid.pieceCellArea[row, col] != null)
+        //            {
+        //                pieceCellArea[row + grid.TopValue - TopValue, col + grid.LeftValue - LeftValue] =
+        //                    grid.pieceCellArea[row, col];
+
+        //            }
+        //        }
+        //    }
+        //}
+
+        public void AssignPieceAndGrid(Grid g)
         {
-            if (grid.RowValue > RowValue || grid.ColumnsValue > ColumnsValue) return;
+            if (g.RowValue > RowValue || g.ColumnsValue > ColumnsValue)
+                return;
 
-            for (int row = 0; row < grid.RowValue; row++)
-            {
-                for (int col = 0; col < grid.ColumnsValue; col++)
-                {
-                    if (grid.pieceCellArea[row, col] != null)
-                    {
-                        pieceCellArea[row + grid.TopValue - TopValue, col + grid.LeftValue - LeftValue] =
-                            grid.pieceCellArea[row, col];
-
-                    }
-                }
-            }
-
-
+            for (int row = 0; row < g.RowValue; row++)
+                for (int column = 0; column < g.ColumnsValue; column++)
+                    if (g.GetPieceCellArea()[row, column] != null)
+                        GetPieceCellArea()[row + g.TopValue - TopValue, column + g.LeftValue - LeftValue]
+                            = g.GetPieceCellArea()[row, column];
         }
-
     }
 }

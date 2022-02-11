@@ -14,28 +14,16 @@ namespace Tetris_CMD
 
         public static Primitives[,] CreateShape(int rot)
         {
-            rot = rot % rotAlternative;
+            rot %= rotAlternative;
 
-            switch (rot)
+            return rot switch
             {
-                default:
-                    break;
-
-                case 0:
-                    return TetrisShapeLForm_0();
-
-                case 1:
-                    return TetrisShapeLForm_1();
-
-                case 2:
-                    return TetrisShapeLForm_2();
-
-                case 3:
-                    return TetrisShapeLForm_3();
-            }
-
-            return null;
-
+                0 => TetrisShapeLForm_0(),
+                1 => TetrisShapeLForm_1(),
+                2 => TetrisShapeLForm_2(),
+                3 => TetrisShapeLForm_3(),
+                _ => null,
+            };
         }
 
         private static Primitives[,] TetrisShapeLForm_0()

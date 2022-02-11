@@ -8,8 +8,8 @@ namespace Tetris_CMD
 {
     public class GameBoard
     {
-        public const int boardHeight = 20;
-        public const int boardWidth = 10;
+        public const int boardHeight = 25;
+        public const int boardWidth = 20;
 
         private int linesPerLvlAmount = 10;
         private int shapeAmount = 7;
@@ -63,7 +63,7 @@ namespace Tetris_CMD
             currentShape.Draw(levelGrid);
 
         }
-
+    
         public void UpdateGameLoop()
         {
 
@@ -72,7 +72,7 @@ namespace Tetris_CMD
                 if (CurrentShapePosIsOutOfBoard())
                 {
                     isFinished = true;
-                    Console.Title = "FUENM";
+                    
                     return;
                 }
                 levelGrid.AssignPieceAndGrid(currentShape.ReturnGrid);
@@ -80,7 +80,7 @@ namespace Tetris_CMD
                 nextShape = new ObjectShape(levelGrid,
                     (ObjectShape.TetrisShape)(randValue.Next(0, shapeAmount)));
             }
-            currentShape.MoveDownByTime(5);
+            currentShape.MoveDownByTime(1);
         }
 
         private static void DrawGameBox(int x, int y, int width, int height)
@@ -139,6 +139,39 @@ namespace Tetris_CMD
             //    levelGrid.TopValue + levelGrid.RowValue / 2 - 3, 10, 10, false);
         }
 
+
+        public void GetKeyInputAndMovePieces()
+        {
+            ConsoleKey consoleKey;
+
+            if (Console.KeyAvailable)
+            {
+                consoleKey = Console.ReadKey().Key;
+
+                switch (consoleKey)
+                {
+                    default:
+                        break;
+
+                    case ConsoleKey.LeftArrow:
+                        currentShape.MovePieceLeft();
+                        break;
+
+                    case ConsoleKey.RightArrow:
+                        currentShape.MovePieceRight();
+                        break;
+
+                    case ConsoleKey.DownArrow:
+                        currentShape.MoveDownByTime();
+                        break;
+
+                    case ConsoleKey.Spacebar:
+                        currentShape.RotatePiece();
+                        break;
+                }
+            }
+
+        }
 
     }
 }

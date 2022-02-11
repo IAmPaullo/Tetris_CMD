@@ -14,7 +14,7 @@ namespace Tetris_CMD
 
         public static Primitives[,] CreateShape(int rot)
         {
-            rot = rot % rotAlternative;
+            rot %= rotAlternative;
 
 
             Primitives[,] result = new Primitives[4, 4];

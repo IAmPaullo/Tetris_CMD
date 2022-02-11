@@ -9,7 +9,7 @@ namespace Tetris_CMD
     public class ObjectShape
     {
         private float topPos;
-        private int rot;
+        private int rot = 0;
         private bool isDestroyed = false;
         private Grid grid;
         private Grid boardGrid;
@@ -24,7 +24,7 @@ namespace Tetris_CMD
             //AssignAction();
             this.boardGrid = boardGrid;
             this.type = type;
-            grid = new Grid(boardGrid.TopValue - 3, boardGrid.LeftValue + 3, NewObjectShape(type, rot));
+            grid = new Grid(boardGrid.TopValue - 3, boardGrid.LeftValue + 7, NewObjectShape(type, rot));
             topPos = grid.TopValue;
         }
 
@@ -52,8 +52,6 @@ namespace Tetris_CMD
         {
             switch (type)
             {
-                default:
-                    break;
 
                 case TetrisShape.I:
                     return TetrisShapeI.CreateShape(rot);
@@ -85,6 +83,18 @@ namespace Tetris_CMD
             return null;
         }
 
+
+        public void RotatePiece()
+        {
+            Primitives[,] rotPieceCell = NewObjectShape(type, rot);
+            Grid gridRotated = new Grid(grid, rotPieceCell);
+
+            if (!ColliderHandler.isColliding(boardGrid, gridRotated))
+            {
+                grid = gridRotated;
+                rot++;
+            }
+        }
 
         public void MovePieceLeft()
         {
