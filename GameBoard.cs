@@ -9,24 +9,24 @@ namespace Tetris_CMD
     public class GameBoard
     {
         public const int boardHeight = 20;
-        public const int boardWidth = 20;
+        public const int boardWidth = 10;
 
         private int linesPerLvlAmount = 10;
         private int shapeAmount = 7;
         private int lines = 0;
         private int score = 0;
         private int level = 0;
-        private float speed = 10f;
+        private float speed = 5f;
         private bool isFinished = false;
         private Grid levelGrid;
-        private ObjectShape currentShape, nextShape;
+        public ObjectShape currentShape, nextShape;
 
 
         private Random randValue = new Random();
 
         public GameBoard(int top, int left)
         {
-            levelGrid = new Grid(top, left, boardHeight, boardWidth);
+            levelGrid = new Grid(top, left, boardWidth, boardHeight);
             currentShape = new ObjectShape(levelGrid,
                 (ObjectShape.TetrisShape)(randValue.Next(0, shapeAmount)));
 
@@ -37,6 +37,24 @@ namespace Tetris_CMD
         {
             return isFinished;
         }
+        private bool CurrentShapePosIsOutOfBoard()
+        {
+            for (int row = 0; row < currentShape.ReturnGrid.RowValue; row++)
+            {
+                for (int columns = 0; columns < currentShape.ReturnGrid.ColumnsValue; columns++)
+                {
+                    if (currentShape.ReturnGrid.GetPieceCellArea()[row, columns] != null)
+                    {
+                        if (row + currentShape.ReturnGrid.TopValue < 0)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
         public void DrawBoard()
         {
             Console.Clear();
@@ -51,18 +69,25 @@ namespace Tetris_CMD
 
             if (currentShape.ReturnIsDestroyed)
             {
+                if (CurrentShapePosIsOutOfBoard())
+                {
+                    isFinished = true;
+                    Console.Title = "FUENM";
+                    return;
+                }
                 levelGrid.AssignPieceAndGrid(currentShape.ReturnGrid);
                 currentShape = nextShape;
                 nextShape = new ObjectShape(levelGrid,
                     (ObjectShape.TetrisShape)(randValue.Next(0, shapeAmount)));
             }
-            currentShape.MoveDownByTime(speed);
+            currentShape.MoveDownByTime(5);
         }
 
         private static void DrawGameBox(int x, int y, int width, int height)
         {
+
+            string stringCharToUse = "┌━┐│└┘"; 
             
-            string stringCharToUse = "┌━┐│└┘";
             string setString = stringCharToUse;
 
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tetris_CMD
 {
-    class Grid
+    public class Grid
     {
         private int columns, rows;
         private int top, left;
@@ -35,8 +35,8 @@ namespace Tetris_CMD
 
         public Grid(int top, int left, Primitives[,] pieceCellArea)
         {
-            columns = pieceCellArea.GetLength(0);
-            rows = pieceCellArea.GetLength(1);
+            columns = pieceCellArea.GetLength(1);
+            rows = pieceCellArea.GetLength(0);
             this.top = top;
             this.left = left;
             this.pieceCellArea = pieceCellArea;
@@ -105,18 +105,18 @@ namespace Tetris_CMD
             }
         }
 
-        public void AssignPieceAndGrid(Grid g)
+        public void AssignPieceAndGrid(Grid grid)
         {
-            if (g.RowValue > RowValue || g.ColumnsValue > ColumnsValue) return;
+            if (grid.RowValue > RowValue || grid.ColumnsValue > ColumnsValue) return;
 
-            for (int row = 0; row < g.RowValue; row++)
+            for (int row = 0; row < grid.RowValue; row++)
             {
-                for (int col = 0; col < g.ColumnsValue; col++)
+                for (int col = 0; col < grid.ColumnsValue; col++)
                 {
-                    if (g.pieceCellArea[row, col] != null)
+                    if (grid.pieceCellArea[row, col] != null)
                     {
-                        pieceCellArea[row + g.TopValue - TopValue, col + g.LeftValue - LeftValue] =
-                            g.pieceCellArea[row, col];
+                        pieceCellArea[row + grid.TopValue - TopValue, col + grid.LeftValue - LeftValue] =
+                            grid.pieceCellArea[row, col];
 
                     }
                 }

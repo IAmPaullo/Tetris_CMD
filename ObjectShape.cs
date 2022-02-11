@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tetris_CMD
 {
-    class ObjectShape
+    public class ObjectShape
     {
         private float topPos;
         private int rot;
@@ -98,19 +98,7 @@ namespace Tetris_CMD
                 grid.MoveRight();
         }
 
-        public void MovePieceDown()
-        {
-            if (!ColliderHandler.isColliding(boardGrid, grid, 0, 1))
-            {
-                grid.MoveDown();
-            }
-            else
-            {
-                isDestroyed = true;
-            }
-        }
-
-        public void MoveDownByTime(float speed)
+        public void MoveDownByTime(float speed = 1f)
         {
             topPos += speed;
 

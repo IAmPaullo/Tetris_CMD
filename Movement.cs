@@ -8,6 +8,7 @@ namespace Tetris_CMD
 {
     public class Movement
     {
+        private GameBoard gameBoard = new GameBoard(2, Console.WindowWidth / 2 - 5);
         public void GetKeyInputAndMovePieces()
         {
             ConsoleKey consoleKey;
@@ -22,15 +23,15 @@ namespace Tetris_CMD
                         break;
 
                     case ConsoleKey.LeftArrow:
-                        Console.WriteLine(Console.KeyAvailable);
+                        gameBoard.currentShape.MovePieceLeft();
                         break;
 
                     case ConsoleKey.RightArrow:
-                        Console.WriteLine(Console.KeyAvailable);
+                        gameBoard.currentShape.MovePieceRight();
                         break;
 
                     case ConsoleKey.DownArrow:
-                        Console.WriteLine(Console.KeyAvailable);
+                       // gameBoard.currentShape.MovePieceDown();
                         break;
 
                     case ConsoleKey.Spacebar:

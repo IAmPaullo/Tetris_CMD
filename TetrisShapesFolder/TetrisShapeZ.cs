@@ -9,7 +9,7 @@ namespace Tetris_CMD
     public static class TetrisShapeZ
     {
         private const int rotAlternative = 2;
-        private const ConsoleColor shapeColor = ConsoleColor.White;
+        private const ConsoleColor shapeColor = ConsoleColor.DarkYellow;
 
         
         public static Primitives[,] CreateShape(int rot)
