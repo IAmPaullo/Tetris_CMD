@@ -26,44 +26,15 @@ namespace Tetris_CMD
 
         public GameBoard(int top, int left)
         {
-            levelGrid = new Grid(top, left, boardWidth, boardHeight);
+            levelGrid = new Grid(top, left, boardHeight, boardWidth);
             currentShape = new ObjectShape(levelGrid,
                 (ObjectShape.TetrisShape)(randValue.Next(0, shapeAmount)));
 
             nextShape = new ObjectShape(levelGrid,
                 (ObjectShape.TetrisShape)(randValue.Next(0, shapeAmount)));
         }
-        public bool GameHasFinished()
-        {
-            return isFinished;
-        }
-        private bool CurrentShapePosIsOutOfBoard()
-        {
-            for (int row = 0; row < currentShape.ReturnGrid.RowValue; row++)
-            {
-                for (int columns = 0; columns < currentShape.ReturnGrid.ColumnsValue; columns++)
-                {
-                    if (currentShape.ReturnGrid.GetPieceCellArea()[row, columns] != null)
-                    {
-                        if (row + currentShape.ReturnGrid.TopValue < 0)
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
-        }
 
-        public void DrawBoard()
-        {
-            Console.Clear();
-            DrawBorder();
-            levelGrid.DrawArea();
-            currentShape.Draw(levelGrid);
 
-        }
-    
         public void UpdateGameLoop()
         {
 
@@ -72,7 +43,7 @@ namespace Tetris_CMD
                 if (CurrentShapePosIsOutOfBoard())
                 {
                     isFinished = true;
-                    
+
                     return;
                 }
                 levelGrid.AssignPieceAndGrid(currentShape.ReturnGrid);
@@ -83,6 +54,15 @@ namespace Tetris_CMD
             currentShape.MoveDownByTime(1);
         }
 
+        public void DrawBoard()
+        {
+            Console.Clear();
+            DrawBorder();
+            levelGrid.DrawArea();
+            currentShape.Draw(levelGrid);
+
+
+        }
         private static void DrawGameBox(int x, int y, int width, int height)
         {
 
@@ -127,8 +107,6 @@ namespace Tetris_CMD
             Console.Write(setString[5]);
 
         }
-
-
         private void DrawBorder()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -138,8 +116,6 @@ namespace Tetris_CMD
             //DrawGameBox(levelGrid.LeftValue + levelGrid.ColumnsValue + 2,
             //    levelGrid.TopValue + levelGrid.RowValue / 2 - 3, 10, 10, false);
         }
-
-
         public void GetKeyInputAndMovePieces()
         {
             ConsoleKey consoleKey;
@@ -172,6 +148,38 @@ namespace Tetris_CMD
             }
 
         }
+
+
+        public bool GameHasFinished()
+        {
+            return isFinished;
+        }
+        private bool CurrentShapePosIsOutOfBoard()
+        {
+            for (int row = 0; row < currentShape.ReturnGrid.RowValue; row++)
+            {
+                for (int columns = 0; columns < currentShape.ReturnGrid.ColumnsValue; columns++)
+                {
+                    if (currentShape.ReturnGrid.GetPieceCellArea()[row, columns] != null)
+                    {
+                        if (row + currentShape.ReturnGrid.TopValue < 0)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+       
+    
+        
+
+
+
+
+
 
     }
 }

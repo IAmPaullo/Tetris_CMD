@@ -18,13 +18,11 @@ namespace Tetris_CMD
         public int ColumnsValue { get { return columns; } }
         public int RowValue { get { return rows; } }
 
-        public void MoveLeft() { left--; }
-        public void MoveRight() { left++; }
-        public void MoveDown() { top++; }
 
 
 
-        public Grid(int top, int left, int columns, int rows)
+
+        public Grid(int top, int left, int rows, int columns)
         {
             this.columns = columns;
             this.rows = rows;
@@ -50,6 +48,7 @@ namespace Tetris_CMD
             left = grid.LeftValue;
             this.pieceCellArea = pieceCellArea;
         }
+
 
 
         public void DefineGameArea(Primitives[,] pieceCellArea)
@@ -105,34 +104,27 @@ namespace Tetris_CMD
             }
         }
 
-        //public void AssignPieceAndGrid(Grid grid)
-        //{
-        //    if (grid.RowValue > RowValue || grid.ColumnsValue > ColumnsValue) return;
+        public void MoveLeft() { left--; }
+        public void MoveRight() { left++; }
+        public void MoveDown() { top++; }
 
-        //    for (int row = 0; row < grid.RowValue; row++)
-        //    {
-        //        for (int col = 0; col < grid.ColumnsValue; col++)
-        //        {
-        //            if (grid.pieceCellArea[row, col] != null)
-        //            {
-        //                pieceCellArea[row + grid.TopValue - TopValue, col + grid.LeftValue - LeftValue] =
-        //                    grid.pieceCellArea[row, col];
-
-        //            }
-        //        }
-        //    }
-        //}
-
-        public void AssignPieceAndGrid(Grid g)
+        public void AssignPieceAndGrid(Grid grid)
         {
-            if (g.RowValue > RowValue || g.ColumnsValue > ColumnsValue)
-                return;
+            if (grid.RowValue > RowValue || grid.ColumnsValue > ColumnsValue) return;
 
-            for (int row = 0; row < g.RowValue; row++)
-                for (int column = 0; column < g.ColumnsValue; column++)
-                    if (g.GetPieceCellArea()[row, column] != null)
-                        GetPieceCellArea()[row + g.TopValue - TopValue, column + g.LeftValue - LeftValue]
-                            = g.GetPieceCellArea()[row, column];
+            for (int row = 0; row < grid.RowValue; row++)
+            {
+                for (int col = 0; col < grid.ColumnsValue; col++)
+                {
+                    if (grid.pieceCellArea[row, col] != null)
+                    {
+                        pieceCellArea[row + grid.TopValue - TopValue, col + grid.LeftValue - LeftValue] =
+                            grid.pieceCellArea[row, col];
+                    }
+                }
+            }
         }
+
+
     }
 }

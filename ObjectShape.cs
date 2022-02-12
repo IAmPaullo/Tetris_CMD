@@ -89,7 +89,7 @@ namespace Tetris_CMD
             Primitives[,] rotPieceCell = NewObjectShape(type, rot);
             Grid gridRotated = new Grid(grid, rotPieceCell);
 
-            if (!ColliderHandler.isColliding(boardGrid, gridRotated))
+            if (!ColliderHandler.IsColliding(boardGrid, gridRotated))
             {
                 grid = gridRotated;
                 rot++;
@@ -98,13 +98,13 @@ namespace Tetris_CMD
 
         public void MovePieceLeft()
         {
-            if (!ColliderHandler.isColliding(boardGrid, grid, -1, 0))
+            if (!ColliderHandler.IsColliding(boardGrid, grid, -1, 0))
                 grid.MoveLeft();
         }
 
         public void MovePieceRight()
         {
-            if (!ColliderHandler.isColliding(boardGrid, grid, 1, 0))
+            if (!ColliderHandler.IsColliding(boardGrid, grid, 1, 0))
                 grid.MoveRight();
         }
 
@@ -114,7 +114,7 @@ namespace Tetris_CMD
 
             if ((int)(topPos + speed) > (int)topPos)
             {
-                if (!ColliderHandler.isColliding(boardGrid, grid, 0, 1))
+                if (!ColliderHandler.IsColliding(boardGrid, grid, 0, 1))
                 {
                     grid.MoveDown();
                 }
