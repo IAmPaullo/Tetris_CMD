@@ -16,7 +16,8 @@ namespace Tetris_CMD
         private int lines = 0;
         private int score = 0;
         private int level = 0;
-        private float speed = 5f;
+        private int maxPiecesInRow = boardWidth;
+        private float speed = 1f;
         private bool isFinished = false;
         private Grid levelGrid;
         public ObjectShape currentShape, nextShape;
@@ -37,7 +38,7 @@ namespace Tetris_CMD
 
         public void UpdateGameLoop()
         {
-
+            RemoveEntireLine();
             if (currentShape.ReturnIsDestroyed)
             {
                 if (CurrentShapePosIsOutOfBoard())
@@ -66,8 +67,8 @@ namespace Tetris_CMD
         private static void DrawGameBox(int x, int y, int width, int height)
         {
 
-            string stringCharToUse = "┌━┐│└┘"; 
-            
+            string stringCharToUse = "┌━┐│└┘";
+
             string setString = stringCharToUse;
 
 
@@ -125,11 +126,11 @@ namespace Tetris_CMD
                 consoleKey = Console.ReadKey().Key;
 
 
-                
+
 
                 switch (consoleKey)
                 {
-                    
+
                     case ConsoleKey.LeftArrow:
                         currentShape.MovePieceLeft();
                         break;
@@ -142,7 +143,7 @@ namespace Tetris_CMD
                         currentShape.MoveDownByTime();
                         break;
 
-                    case ConsoleKey.Spacebar:
+                    case ConsoleKey.Z:
                         currentShape.RotatePiece();
                         break;
                 }
@@ -163,7 +164,7 @@ namespace Tetris_CMD
                 {
                     if (currentShape.ReturnGrid.GetPieceCellArea()[row, columns] != null)
                     {
-                        if (row + currentShape.ReturnGrid.TopValue < 0)
+                        if (row + currentShape.ReturnGrid.TopValue - levelGrid.TopValue < 0)
                         {
                             return true;
                         }
@@ -173,14 +174,55 @@ namespace Tetris_CMD
             return false;
         }
 
-       
-    
-        
+
+        private void RemoveEntireLine()
+        {
+            int piecesInRow = 0;
+
+            for (int row = 0; row < levelGrid.RowValue; row++)
+            {
+                for (int columns = 0; columns < levelGrid.ColumnsValue; columns++)
+                {
+                    if (levelGrid.GetPieceCellArea()[row, columns] != null)
+                    {
+                        piecesInRow++;
+                    }
+
+                    if (piecesInRow == maxPiecesInRow)
+                    {
+                        levelGrid.DefineGameArea(ClearLineFormatGrid(row, levelGrid.GetPieceCellArea()));
+
+                    }
+
+                }
+
+                piecesInRow = 0;
+            }
+        }
+
+        private Primitives[,] ClearLineFormatGrid(int row, Primitives[,] p)
+        {
+            Primitives[,] result = new Primitives[p.GetLength(0), p.GetLength(1)];
 
 
+            for (int i = row; i > 0; i--)
+            {
+                for (int j = 0; j < p.GetLength(1); j++)
+                {
+                    result[i, j] = p[i - 1, j];
+                }
+            }
 
+            for (int i = row + 1; i < p.GetLength(0); i++)
+            {
+                for (int j = 0; j < p.GetLength(1); j++)
+                {
+                    result[i, j] = p[i, j];
+                }
+            }
 
+            return result;
 
-
+        }
     }
 }

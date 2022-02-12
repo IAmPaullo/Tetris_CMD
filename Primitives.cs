@@ -21,8 +21,8 @@ namespace Tetris_CMD
             Console.ForegroundColor = color;
             Console.SetCursorPosition(x, y);
             //Console.Write('♥');
-            Console.Write('↕');
-            //Console.Write('#');
+            //Console.Write('↕');
+            Console.Write('#');
             
 
         }

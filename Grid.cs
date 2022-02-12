@@ -108,6 +108,7 @@ namespace Tetris_CMD
         public void MoveRight() { left++; }
         public void MoveDown() { top++; }
 
+
         public void AssignPieceAndGrid(Grid grid)
         {
             if (grid.RowValue > RowValue || grid.ColumnsValue > ColumnsValue) return;
