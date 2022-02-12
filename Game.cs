@@ -9,7 +9,7 @@ namespace Tetris_CMD
 {
     class Game
     {
-        private const string windowTitle = "Tetris CMD";
+        private const string windowTitle = "          Tetris CMD " + "               PONTUAÇÃO: ";
         private const int gameLoopTime = 120;
         private GameBoard gameBoard = new GameBoard(2, Console.WindowWidth / 2 - 5);
         private Movement movement = new Movement();
