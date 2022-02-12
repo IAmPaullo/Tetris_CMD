@@ -124,11 +124,12 @@ namespace Tetris_CMD
             {
                 consoleKey = Console.ReadKey().Key;
 
+
+                
+
                 switch (consoleKey)
                 {
-                    default:
-                        break;
-
+                    
                     case ConsoleKey.LeftArrow:
                         currentShape.MovePieceLeft();
                         break;

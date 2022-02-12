@@ -16,18 +16,12 @@ namespace Tetris_CMD
         {
             rot %= rotAlternative;
 
-            switch (rot)
+            return rot switch
             {
- 
-                case 0:
-                    return TetrisShapeIForm_0();
-
-                case 1:
-                    return TetrisShapeIForm_1();
-            }
-
-            return null;
-
+                0 => TetrisShapeIForm_0(),
+                1 => TetrisShapeIForm_1(),
+                _ => null,
+            };
         }
 
         private static Primitives[,] TetrisShapeIForm_0()
