@@ -19,6 +19,7 @@ namespace Tetris_CMD
         private int maxPiecesInRow = 5;
         private float speed = 0.5f;
         private bool isFinished = false;
+        public bool isHardMode = true;
         private Grid levelGrid;
         private ScoreHandler scoreHandler;
         public ObjectShape currentShape, nextShape;
@@ -65,7 +66,9 @@ namespace Tetris_CMD
             scoreHandler.UpdateTitle(score, level, lines);
             levelGrid.DrawArea();
             currentShape.Draw(levelGrid);
-
+            if (isHardMode) return;
+            DrawNextShape();
+            
 
         }
         private static void DrawGameBox(int x, int y, int width, int height)
@@ -155,6 +158,13 @@ namespace Tetris_CMD
 
         }
 
+        private void DrawNextShape()
+        {
+            
+            Console.SetCursorPosition(78, 4);
+            nextShape.Draw(levelGrid);
+
+        }
 
         public bool GameHasFinished()
         {
@@ -199,7 +209,7 @@ namespace Tetris_CMD
                         level = scoreHandler.ScoreManager(lines, linesPerLvlAmount, out score, level);
 
                         //ScoreManager();
-                        
+
 
                     }
 
@@ -224,7 +234,7 @@ namespace Tetris_CMD
         {
             int x = levelGrid.LeftValue + boardWidth + 2;
             int y = levelGrid.TopValue;
-            
+
             Console.Title = "          Tetris CMD " + "               PONTUAÇÃO: " + score;
 
             Console.SetCursorPosition(x, y); // 72, 2 topo direito
