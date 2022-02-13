@@ -9,7 +9,7 @@ namespace Tetris_CMD
     public class ScoreHandler
     {
 
-        public int ScoreManager(int lines, int linesPerLvlAmount, out int score, int level)
+        public int StatsManager(int lines, int linesPerLvlAmount, out int score, int level)
         {
             score = 50 * level / 2;
             if (lines % linesPerLvlAmount == 0)

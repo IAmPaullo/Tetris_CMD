@@ -19,7 +19,7 @@ namespace Tetris_CMD
         private int maxPiecesInRow = 5;
         private float speed = 0.5f;
         private bool isFinished = false;
-        public bool isHardMode = true;
+        public bool isHardMode = false;
         private Grid levelGrid;
         private ScoreHandler scoreHandler;
         public ObjectShape currentShape, nextShape;
@@ -47,7 +47,6 @@ namespace Tetris_CMD
                 if (CurrentShapePosIsOutOfBoard())
                 {
                     isFinished = true;
-
                     return;
                 }
                 levelGrid.AssignPieceAndGrid(currentShape.ReturnGrid);
@@ -62,11 +61,10 @@ namespace Tetris_CMD
         {
             Console.Clear();
             DrawBorder();
-            //UpdateTitleAndStats();
             scoreHandler.UpdateTitle(score, level, lines);
             levelGrid.DrawArea();
             currentShape.Draw(levelGrid);
-            if (isHardMode) return;
+            if (isHardMode == true) return;
             DrawNextShape();
             
 
@@ -121,8 +119,6 @@ namespace Tetris_CMD
             DrawGameBox(levelGrid.LeftValue - 1, levelGrid.TopValue - 1,
                 boardWidth + 2, boardHeight + 2);
 
-            //DrawGameBox(levelGrid.LeftValue + levelGrid.ColumnsValue + 2,
-            //    levelGrid.TopValue + levelGrid.RowValue / 2 - 3, 10, 10, false);
         }
         public void GetKeyInputAndMovePieces()
         {
@@ -161,8 +157,10 @@ namespace Tetris_CMD
         private void DrawNextShape()
         {
             
-            Console.SetCursorPosition(78, 4);
-            nextShape.Draw(levelGrid);
+            Console.SetCursorPosition(72, 8);
+            Console.Write("Proximo Tetraminó: ");
+            nextShape.Draw(levelGrid.LeftValue + levelGrid.ColumnsValue + 3,
+                levelGrid.TopValue + levelGrid.RowValue / 3 );
 
         }
 
@@ -206,40 +204,13 @@ namespace Tetris_CMD
                     {
                         levelGrid.DefineGameArea(ClearLineFormatGrid(row, levelGrid.GetPieceCellArea()));
                         lines++;
-                        level = scoreHandler.ScoreManager(lines, linesPerLvlAmount, out score, level);
-
-                        //ScoreManager();
-
-
+                        level = scoreHandler.StatsManager(lines, linesPerLvlAmount, out score, level);
                     }
 
                 }
 
                 piecesInRow = 0;
             }
-        }
-
-        public void ScoreManager()
-        {
-
-            lines++;
-            score += 50;
-            if (lines % linesPerLvlAmount == 0)
-            {
-                level++;
-            }
-        }
-
-        public void UpdateTitleAndStats()
-        {
-            int x = levelGrid.LeftValue + boardWidth + 2;
-            int y = levelGrid.TopValue;
-
-            Console.Title = "          Tetris CMD " + "               PONTUAÇÃO: " + score;
-
-            Console.SetCursorPosition(x, y); // 72, 2 topo direito
-            Console.Write(" Lines:" + lines);
-
         }
 
         private Primitives[,] ClearLineFormatGrid(int row, Primitives[,] p)
