@@ -11,18 +11,43 @@ namespace Tetris_CMD
     {
         private string windowTitle = "          Tetris CMD " + "               PONTUAÇÃO: ";
         private const int gameLoopTime = 120;
+
+        private string msg;
+        private string[] options = { "Normal", "Dificil", "Sair" };
+        private int selectedOption;
+
         private GameBoard gameBoard = new GameBoard(2, Console.WindowWidth / 2 - 5);
         private Movement movement = new Movement();
-        
-        
-        public void Awake()
+        public void Start()
+        {
+            
+            SetupConsoleConfig();
+            SetupMainMenu();
+            GameLoop();
+            
+        }
+
+        private void SetupMainMenu()
+        {
+
+            StartMenu startMenu = new StartMenu(msg, options);
+            selectedOption = startMenu.Start();
+
+            //msg = $@"{startMenu}";
+        }
+
+        private void SetupConsoleConfig()
         {
             Console.OutputEncoding = Encoding.Unicode;
             Console.Title = windowTitle;
             Console.BufferHeight = Console.WindowHeight + 50;
             Console.BufferWidth = Console.WindowWidth + 50;
+        }
 
+        private void GameLoop()
+        {
             gameBoard.DrawBoard();
+
 
             while (!gameBoard.GameHasFinished())
             {
@@ -35,12 +60,12 @@ namespace Tetris_CMD
 
                 Thread.Sleep(gameLoopTime);
 
-                
+
             }
         }
-        
+
     }
 
 
-   
+
 }
