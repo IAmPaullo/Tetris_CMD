@@ -9,17 +9,18 @@ namespace Tetris_CMD
     public class GameBoard
     {
         public const int boardHeight = 25;
-        public const int boardWidth = 20;
+        public const int boardWidth = 15;
 
-        private int linesPerLvlAmount = 10;
+        private int linesPerLvlAmount = 15;
         private int shapeAmount = 7;
         private int lines = 0;
         private int score = 0;
-        private int level = 0;
-        private int maxPiecesInRow = boardWidth;
-        private float speed = 1f;
+        private int level = 1;
+        private int maxPiecesInRow = 5;
+        private float speed = 0.5f;
         private bool isFinished = false;
         private Grid levelGrid;
+        private ScoreHandler scoreHandler;
         public ObjectShape currentShape, nextShape;
 
 
@@ -27,6 +28,7 @@ namespace Tetris_CMD
 
         public GameBoard(int top, int left)
         {
+            scoreHandler = new ScoreHandler();
             levelGrid = new Grid(top, left, boardHeight, boardWidth);
             currentShape = new ObjectShape(levelGrid,
                 (ObjectShape.TetrisShape)(randValue.Next(0, shapeAmount)));
@@ -59,6 +61,8 @@ namespace Tetris_CMD
         {
             Console.Clear();
             DrawBorder();
+            //UpdateTitleAndStats();
+            scoreHandler.UpdateTitle(score, level, lines);
             levelGrid.DrawArea();
             currentShape.Draw(levelGrid);
 
@@ -191,6 +195,11 @@ namespace Tetris_CMD
                     if (piecesInRow == maxPiecesInRow)
                     {
                         levelGrid.DefineGameArea(ClearLineFormatGrid(row, levelGrid.GetPieceCellArea()));
+                        lines++;
+                        level = scoreHandler.ScoreManager(lines, linesPerLvlAmount, out score, level);
+
+                        //ScoreManager();
+                        
 
                     }
 
@@ -198,6 +207,29 @@ namespace Tetris_CMD
 
                 piecesInRow = 0;
             }
+        }
+
+        public void ScoreManager()
+        {
+
+            lines++;
+            score += 50;
+            if (lines % linesPerLvlAmount == 0)
+            {
+                level++;
+            }
+        }
+
+        public void UpdateTitleAndStats()
+        {
+            int x = levelGrid.LeftValue + boardWidth + 2;
+            int y = levelGrid.TopValue;
+            
+            Console.Title = "          Tetris CMD " + "               PONTUAÇÃO: " + score;
+
+            Console.SetCursorPosition(x, y); // 72, 2 topo direito
+            Console.Write(" Lines:" + lines);
+
         }
 
         private Primitives[,] ClearLineFormatGrid(int row, Primitives[,] p)
