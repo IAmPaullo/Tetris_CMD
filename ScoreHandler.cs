@@ -8,9 +8,9 @@ namespace Tetris_CMD
 {
     public class ScoreHandler
     {
-        
+
         public int ScoreManager(int lines, int linesPerLvlAmount, out int score, int level)
-        { 
+        {
             score = 50 * level / 2;
             if (lines % linesPerLvlAmount == 0)
             {
@@ -20,7 +20,7 @@ namespace Tetris_CMD
             return level;
         }
 
-        public void UpdateTitle(int score, int line)
+        public void UpdateTitle(int score, int level, int line)
         {
 
 
@@ -28,7 +28,9 @@ namespace Tetris_CMD
 
             Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(72, 2); // 72, 2 topo direito
-            Console.Write(" Linhas Concluidas:" + line);
+            Console.Write("Linhas Concluidas:" + line);
+            Console.SetCursorPosition(72, 4);
+            Console.Write("Level: " + level);
         }
 
 
