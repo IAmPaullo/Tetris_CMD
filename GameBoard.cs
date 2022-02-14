@@ -16,7 +16,7 @@ namespace Tetris_CMD
         private int lines = 0;
         private int score = 0;
         private int level = 1;
-        private int maxPiecesInRow = 5;
+        private int maxPiecesInRow = 15;
         private float speed = 0.5f;
         private bool isFinished = false;
         public bool isHardMode;
@@ -24,8 +24,8 @@ namespace Tetris_CMD
         private ScoreHandler scoreHandler;
         public ObjectShape currentShape, nextShape;
 
-        
-        private Random randValue = new Random();
+        private SceneHandler sceneHandler = new();
+        private Random randValue = new();
 
         public GameBoard(int top, int left)
         {
@@ -36,6 +36,8 @@ namespace Tetris_CMD
 
             nextShape = new ObjectShape(levelGrid,
                 (ObjectShape.TetrisShape)(randValue.Next(0, shapeAmount)));
+
+
         }
 
 
@@ -66,7 +68,7 @@ namespace Tetris_CMD
             currentShape.Draw(levelGrid);
             if (isHardMode == true) return;
             DrawNextShape();
-            
+
 
         }
         private static void DrawGameBox(int x, int y, int width, int height)
@@ -156,11 +158,11 @@ namespace Tetris_CMD
 
         private void DrawNextShape()
         {
-            
+
             Console.SetCursorPosition(72, 8);
             Console.Write("Proximo Tetraminó: ");
             nextShape.Draw(levelGrid.LeftValue + levelGrid.ColumnsValue + 3,
-                levelGrid.TopValue + levelGrid.RowValue / 3 );
+                levelGrid.TopValue + levelGrid.RowValue / 3);
 
         }
 

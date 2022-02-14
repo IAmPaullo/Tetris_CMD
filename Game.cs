@@ -18,6 +18,7 @@ namespace Tetris_CMD
 
         private GameBoard gameBoard = new GameBoard(2, Console.WindowWidth / 2 - 5);
         private Movement movement = new Movement();
+        private SceneHandler sceneHandler = new();
         
         public bool isHardMode;
 
@@ -27,6 +28,7 @@ namespace Tetris_CMD
             SetupConsoleConfig();
             SetupMainMenu();
             GameLoop();
+            
 
         }
 
@@ -35,9 +37,10 @@ namespace Tetris_CMD
 
             StartMenu startMenu = new StartMenu(msg, options);
             selectedOption = startMenu.Start();
-            SceneHandler();
+            
+            sceneHandler.DefineSceneByIndex(selectedOption);
 
-            //msg = $@"{startMenu}";
+            
         }
 
         private void SetupConsoleConfig()
@@ -51,16 +54,7 @@ namespace Tetris_CMD
         private void GameLoop()
         {
 
-            
-            //if (selectedOption == 1)
-            //{
-            //    gameBoard.isHardMode = true;
-            //}
-            //else
-            //{
-            //    gameBoard.isHardMode = false;
-            //}
-
+            gameBoard.isHardMode = sceneHandler.isHardMode;
 
             gameBoard.DrawBoard();
             while (!gameBoard.GameHasFinished())
@@ -70,43 +64,12 @@ namespace Tetris_CMD
                 gameBoard.UpdateGameLoop();
                 gameBoard.DrawBoard();
 
-                //Console.ReadKey();
+                
 
                 Thread.Sleep(gameLoopTime);
 
 
             }
-        }
-
-
-        private void SceneHandler()
-        {
-
-
-            switch (selectedOption)
-            {
-
-                case 0:
-                    gameBoard.isHardMode = false;
-                    break;
-
-                case 1:
-                    gameBoard.isHardMode = true;
-                    break;
-
-                case 2:
-
-                    Console.WriteLine("Aperte Enter pra sair.");
-                    ConsoleKeyInfo k = Console.ReadKey(true);
-                    if (k.Key == ConsoleKey.Enter)
-                    {
-                        Environment.Exit(0);
-                    }
-                    break;
-
-
-            }
-
         }
     }
 
