@@ -19,6 +19,7 @@ namespace Tetris_CMD
         private GameBoard gameBoard = new GameBoard(2, Console.WindowWidth / 2 - 5);
         private Movement movement = new Movement();
         private SceneHandler sceneHandler = new();
+        private GameOverHandler gameOver = new();
         
         public bool isHardMode;
 
@@ -70,6 +71,7 @@ namespace Tetris_CMD
 
 
             }
+            gameOver.DefineGameOverScreen();
         }
     }
 

@@ -18,6 +18,8 @@ namespace Tetris_CMD
 
         public int Lines { get; set; }
 
+        private SaveHandler saveHandler = new();
+
         
         public void SetData(int score, int level, int line)
         {
@@ -29,11 +31,13 @@ namespace Tetris_CMD
 
         public int StatsManager(int lines, int linesPerLvlAmount, out int score, int level)
         {
-            score = 50 * level / 2;
+            score = 50 * level;
             if (lines % linesPerLvlAmount == 0)
             {
                 level++;
             }
+
+            saveHandler.SaveToTxt(score, level, lines);
 
             return level;
         }

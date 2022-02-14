@@ -15,7 +15,7 @@ namespace Tetris_CMD
             ConsoleColor.Green, ConsoleColor.Yellow, ConsoleColor.Red };
         private Random randValue = new();
         
-        private List<string> menuTextRandom = new();
+        private List<string> menuTextOptions = new();
 
         public StartMenu(string prompt, string[] options)
         {
@@ -35,7 +35,7 @@ namespace Tetris_CMD
 
         private void DrawOptions()
         {
-            int randText = randValue.Next(0, menuTextRandom.Count);
+            int randText = randValue.Next(0, menuTextOptions.Count);
             Console.SetCursorPosition(Console.WindowWidth / 2 - 10,
                 Console.WindowHeight / 2 - 10);
             mainMenuText = DefineRandomText(randText);
@@ -102,13 +102,13 @@ namespace Tetris_CMD
 
 
 
-        private string DefineRandomText(int value) { return menuTextRandom[value]; }
+        private string DefineRandomText(int value) { return menuTextOptions[value]; }
      
 
 
         private void AddMenuTitleList()
         {
-            menuTextRandom.Add(@"
+            menuTextOptions.Add(@"
                  _______ ______ _______ _____  _____  _____ 
                 |__   __|  ____|__   __|  __ \|_   _|/ ____|
                    | |  | |__     | |  | |__) | | | | (___  
@@ -119,7 +119,7 @@ namespace Tetris_CMD
                                              
 
 ");
-            menuTextRandom.Add(@"
+            menuTextOptions.Add(@"
                   ______________________  _________
                  /_  __/ ____/_  __/ __ \/  _/ ___/
                   / / / __/   / / / /_/ // / \__ \ 
@@ -130,7 +130,7 @@ namespace Tetris_CMD
 
 
 ");
-            menuTextRandom.Add(@"
+            menuTextOptions.Add(@"
                 
                  _______ _______ _______ ______  _  ______ 
                 (_______|_______|_______|_____ \| |/ _____)
@@ -144,7 +144,7 @@ namespace Tetris_CMD
                               
 
 ");
-            menuTextRandom.Add(@"
+            menuTextOptions.Add(@"
                  ______  ______  ______  ______  __  ______    
                 /\__  _\/\  ___\/\__  _\/\  == \/\ \/\  ___\   
                 \/_/\ \/\ \  __\\/_/\ \/\ \  __<\ \ \ \___  \  
@@ -156,7 +156,7 @@ namespace Tetris_CMD
 
 
 ");
-            menuTextRandom.Add(@"
+            menuTextOptions.Add(@"
                  _______ _______ _______ ______ _______ _______ 
                 |_     _|    ___|_     _|   __ \_     _|     __|
                   |   | |    ___| |   | |      <_|   |_|__     |
@@ -164,7 +164,7 @@ namespace Tetris_CMD
                                                                 
 
 ");
-            menuTextRandom.Add(@"
+            menuTextOptions.Add(@"
 
                 ░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░
                 ░░░░░░░▒▒▒░░░░░░░░▒▒▒░░░░░░░░░░░
@@ -183,7 +183,7 @@ namespace Tetris_CMD
                 ░░░░░░▒▒▒▒▒▒░░░░▒▒▒▒▒▒░░░░░░░░░░
 
 ");
-            menuTextRandom.Add(@"
+            menuTextOptions.Add(@"
                  _____ _____ _____ ____  ___ ____  
                 |_   _| ____|_   _|  _ \|_ _/ ___| 
                   | | |  _|   | | | |_) || |\___ \ 
@@ -193,10 +193,10 @@ namespace Tetris_CMD
 
 
 ");
-            menuTextRandom.Add(@"010101001000101010101001010010100100101010011");
+            menuTextOptions.Add(@"010101001000101010101001010010100100101010011");
 
 
-            menuTextRandom.Add(@"
+            menuTextOptions.Add(@"
              ________  ________  ________  _______   ___  ___  ________      
             |\   ____\|\   __  \|\_____  \|\  ___ \ |\  \|\  \|\   ____\     
             \ \  \___|\ \  \|\  \\|___/  /\ \   __/|\ \  \\\  \ \  \___|_    

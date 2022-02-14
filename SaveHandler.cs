@@ -8,22 +8,25 @@ using System.Reflection;
 
 namespace Tetris_CMD
 {
-    class SaveHandler
+    public class SaveHandler
     {
-        private ScoreHandler scoreHandler;
+        string exePath = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"saveFile.txt");
+
+
         public void SaveToTxt(int score, int level, int lines)
         {
             try
             {
-                string exePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                
                 StreamWriter sw = new(exePath);
-                sw.WriteLine($"Score = {scoreHandler.GetScore()}");
-                sw.WriteLine($"Level = {scoreHandler.GetLevel()}");
-                sw.WriteLine($"Linhas Destruídas = {scoreHandler.GetLines()}");
+                sw.WriteLine($"Score = {score}");
+                sw.WriteLine($"Level = {level}");
+                sw.WriteLine($"Linhas Destruídas = {lines}");
+                sw.Close();
             }
             catch (Exception e)
             {
-                Console.WriteLine("Erro no save");
+                Console.WriteLine(e.Message);
             }
             finally
             {
@@ -32,6 +35,30 @@ namespace Tetris_CMD
 
 
         }
+
+
+        public void LoadFromTxt()
+        {
+            try
+            {
+                StreamReader sr = new(exePath);
+                string content = sr.ReadLine();
+
+                while (content != null)
+                {
+                    Console.WriteLine(content);
+                    content = sr.ReadLine();
+                }
+
+                sr.Close();
+                Console.ReadLine();
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
+        }
+
 
 
     }
