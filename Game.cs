@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Tetris_CMD
 {
-    class Game
+    public class Game
     {
         private string windowTitle = "          Tetris CMD " + "               PONTUAÇÃO: ";
         private const int gameLoopTime = 120;
@@ -18,13 +18,16 @@ namespace Tetris_CMD
 
         private GameBoard gameBoard = new GameBoard(2, Console.WindowWidth / 2 - 5);
         private Movement movement = new Movement();
+        
+        public bool isHardMode;
+
         public void Start()
         {
-            
+
             SetupConsoleConfig();
             SetupMainMenu();
             GameLoop();
-            
+
         }
 
         private void SetupMainMenu()
@@ -32,6 +35,7 @@ namespace Tetris_CMD
 
             StartMenu startMenu = new StartMenu(msg, options);
             selectedOption = startMenu.Start();
+            SceneHandler();
 
             //msg = $@"{startMenu}";
         }
@@ -46,9 +50,19 @@ namespace Tetris_CMD
 
         private void GameLoop()
         {
+
+            
+            //if (selectedOption == 1)
+            //{
+            //    gameBoard.isHardMode = true;
+            //}
+            //else
+            //{
+            //    gameBoard.isHardMode = false;
+            //}
+
+
             gameBoard.DrawBoard();
-
-
             while (!gameBoard.GameHasFinished())
             {
 
@@ -64,8 +78,42 @@ namespace Tetris_CMD
             }
         }
 
+
+        private void SceneHandler()
+        {
+
+
+            switch (selectedOption)
+            {
+
+                case 0:
+                    gameBoard.isHardMode = false;
+                    break;
+
+                case 1:
+                    gameBoard.isHardMode = true;
+                    break;
+
+                case 2:
+
+                    Console.WriteLine("Aperte Enter pra sair.");
+                    ConsoleKeyInfo k = Console.ReadKey(true);
+                    if (k.Key == ConsoleKey.Enter)
+                    {
+                        Environment.Exit(0);
+                    }
+                    break;
+
+
+            }
+
+        }
     }
 
-
-
 }
+
+
+    
+
+
+

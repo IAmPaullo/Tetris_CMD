@@ -11,6 +11,8 @@ namespace Tetris_CMD
         private int selectedOption;
         private string[] options;
         private string mainMenuText;
+        private ConsoleColor[] colorOptions = { ConsoleColor.White, ConsoleColor.Blue,
+            ConsoleColor.Green, ConsoleColor.Yellow, ConsoleColor.Red };
         private Random randValue = new();
         
         private List<string> menuTextRandom = new();
@@ -37,6 +39,9 @@ namespace Tetris_CMD
             Console.SetCursorPosition(Console.WindowWidth / 2 - 10,
                 Console.WindowHeight / 2 - 10);
             mainMenuText = DefineRandomText(randText);
+
+            int randColor = randValue.Next(0, colorOptions.Length);
+            Console.ForegroundColor = colorOptions[randColor];
 
             Console.WriteLine(mainMenuText);
             for (int i = 0; i < options.Length; i++)
@@ -190,6 +195,36 @@ namespace Tetris_CMD
 ");
             menuTextRandom.Add(@"010101001000101010101001010010100100101010011");
 
+
+            menuTextRandom.Add(@"
+             ________  ________  ________  _______   ___  ___  ________      
+            |\   ____\|\   __  \|\_____  \|\  ___ \ |\  \|\  \|\   ____\     
+            \ \  \___|\ \  \|\  \\|___/  /\ \   __/|\ \  \\\  \ \  \___|_    
+             \ \  \  __\ \   __  \   /  / /\ \  \_|/_\ \  \\\  \ \_____  \   
+              \ \  \|\  \ \  \ \  \ /  /_/__\ \  \_|\ \ \  \\\  \|____|\  \  
+               \ \_______\ \__\ \__\\________\ \_______\ \_______\____\_\  \ 
+                \|_______|\|__|\|__|\|_______|\|_______|\|_______|\_________\
+                                                                 \|_________|
+ 
+
+
+
+
+
+        
+                                           _             _        
+          _ __ ___   ___    ___ ___  _ __ | |_ _ __ __ _| |_ __ _ 
+         | '_ ` _ \ / _ \  / __/ _ \| '_ \| __| '__/ _` | __/ _` |
+         | | | | | |  __/ | (_| (_) | | | | |_| | | (_| | || (_| |
+         |_| |_| |_|\___|  \___\___/|_| |_|\__|_|  \__,_|\__\__,_|
+                                                                  
+
+                                                         
+
+
+
+
+");
 
         }
 

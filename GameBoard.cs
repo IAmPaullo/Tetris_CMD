@@ -19,12 +19,12 @@ namespace Tetris_CMD
         private int maxPiecesInRow = 5;
         private float speed = 0.5f;
         private bool isFinished = false;
-        public bool isHardMode = false;
+        public bool isHardMode;
         private Grid levelGrid;
         private ScoreHandler scoreHandler;
         public ObjectShape currentShape, nextShape;
 
-
+        
         private Random randValue = new Random();
 
         public GameBoard(int top, int left)
