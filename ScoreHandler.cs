@@ -18,9 +18,7 @@ namespace Tetris_CMD
 
         public int Lines { get; set; }
 
-
-        private JSONFileSave saveFile = new();
-
+        
         public void SetData(int score, int level, int line)
         {
             Score = score;
@@ -61,32 +59,6 @@ namespace Tetris_CMD
 
     }
 
-    
-    public class JSONFileSave
-    {
-
-        public static void SaveMain()
-        {
-
-            var saveFile = new SaveFileJSON
-            {
-                Score = new ScoreHandler().GetScore(),
-                Level = new ScoreHandler().GetLevel(),
-                Lines = new ScoreHandler().GetLines()
-
-            };
-
-            string fileName = "SaveGameFile.json";
-            string jsonString = JsonSerializer.Serialize(saveFile);
-            File.WriteAllText(fileName, jsonString);
-
-            Console.SetCursorPosition(78, 10);
-            Console.WriteLine("Jogo Salvo");
-        }
-
-    }
-
-
-
+   
 
 }
