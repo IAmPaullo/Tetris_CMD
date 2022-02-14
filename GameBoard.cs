@@ -52,6 +52,7 @@ namespace Tetris_CMD
                     return;
                 }
                 levelGrid.AssignPieceAndGrid(currentShape.ReturnGrid);
+                scoreHandler.SetData(score, level, lines);
                 currentShape = nextShape;
                 nextShape = new ObjectShape(levelGrid,
                     (ObjectShape.TetrisShape)(randValue.Next(0, shapeAmount)));
