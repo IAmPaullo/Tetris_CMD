@@ -9,6 +9,7 @@ namespace Tetris_CMD
         {
 
             Console.OutputEncoding = Encoding.UTF8;
+            
             Game game = new Game();
             game.Start();
         }

@@ -15,50 +15,88 @@ namespace Tetris_CMD
 
         public void SaveToTxt(int score, int level, int lines)
         {
-            try
-            {
-                
-                StreamWriter sw = new(exePath);
-                sw.WriteLine($"Score = {score}");
-                sw.WriteLine($"Level = {level}");
-                sw.WriteLine($"Linhas Destruídas = {lines}");
-                sw.Close();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                Console.WriteLine("Jogo Salvo!");
-            }
 
+            if (GetScoreFromSave() < score)
+            {
+
+                try
+                {
+
+                    StreamWriter sw = new(exePath);
+                    sw.WriteLine($"Score = {score}");
+                    sw.WriteLine($"Level = {level}");
+                    sw.WriteLine($"Linhas Destruídas = {lines}");
+                    sw.WriteLine(@$"Player: {Environment.UserName}");
+
+                    sw.Close();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                finally
+                {
+                    Console.WriteLine("Jogo Salvo!");
+                }
+            }
 
         }
 
 
         public void LoadFromTxt()
         {
-            try
+            if (File.Exists(exePath))
             {
-                StreamReader sr = new(exePath);
-                string content = sr.ReadLine();
-
-                while (content != null)
+                try
                 {
-                    Console.WriteLine(content);
-                    content = sr.ReadLine();
-                }
+                    StreamReader sr = new(exePath);
+                    string content = sr.ReadLine();
 
-                sr.Close();
-                Console.ReadLine();
-            }catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
+                    while (content != null)
+                    {
+                        Console.WriteLine(content);
+
+                        content = sr.ReadLine();
+                    }
+
+
+
+                    sr.Close();
+                    Console.ReadLine();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
             
         }
 
+        public bool GetFileExists()
+        {
+            if (File.Exists(exePath))
+                return true;
+            else
+                return false;
+        }
+
+        public int GetScoreFromSave()
+        {
+            int value;
+
+            string content = File.ReadLines(exePath).First();
+
+            string newContent = content.Substring(8);
+
+
+            value = int.Parse(newContent);
+
+            Console.WriteLine(newContent);
+
+
+
+            return value;
+        }
 
 
     }

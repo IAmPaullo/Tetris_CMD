@@ -13,7 +13,7 @@ namespace Tetris_CMD
         private const int gameLoopTime = 120;
 
         private string msg;
-        private string[] options = { "Normal", "Dificil", "Sair" };
+        private string[] options = { "Normal", "Dificil","Score", "Sair" };
         private int selectedOption;
 
         private GameBoard gameBoard = new GameBoard(2, Console.WindowWidth / 2 - 5);
@@ -40,6 +40,12 @@ namespace Tetris_CMD
             selectedOption = startMenu.Start();
             
             sceneHandler.DefineSceneByIndex(selectedOption);
+
+            if(selectedOption == 2)
+            {
+                selectedOption = startMenu.Start();
+                
+            }
 
             
         }

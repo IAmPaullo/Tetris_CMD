@@ -8,6 +8,7 @@ namespace Tetris_CMD
 {
     public class SceneHandler
     {
+        private HighScoreScene highScoreScene = new();
 
         public bool isHardMode;
         public void DefineSceneByIndex(int selectedOption)
@@ -26,6 +27,10 @@ namespace Tetris_CMD
                     break;
 
                 case 2:
+                    highScoreScene.ShowHighScore();
+                    break;
+
+                case 3:
 
                     Console.WriteLine("Aperte Enter pra sair.");
                     ConsoleKeyInfo k = Console.ReadKey(true);
@@ -34,6 +39,8 @@ namespace Tetris_CMD
                         Environment.Exit(0);
                     }
                     break;
+
+                
 
 
             }

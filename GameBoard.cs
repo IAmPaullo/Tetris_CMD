@@ -27,7 +27,7 @@ namespace Tetris_CMD
         private SceneHandler sceneHandler = new();
         private Random randValue = new();
 
-        public GameBoard(int top, int left)
+        public GameBoard(int top =0, int left = 0)
         {
             scoreHandler = new ScoreHandler();
             levelGrid = new Grid(top, left, boardHeight, boardWidth);
@@ -40,7 +40,7 @@ namespace Tetris_CMD
 
         }
 
-
+        
         public void UpdateGameLoop()
         {
             RemoveEntireLine();

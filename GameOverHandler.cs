@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace Tetris_CMD
 {
     public class GameOverHandler
     {
         private ScoreHandler scoreHandler = new();
+        private GameBoard gameBoard = new();
         
         private Random randValue = new();
         private List<string> gameOverTextOptions = new();
@@ -18,11 +19,7 @@ namespace Tetris_CMD
             AddGameOverTextToList();
             SetUpGameOverGraphics();
             DisplayStats();
-            ConsoleKeyInfo k = Console.ReadKey(true);
-            if (k.Key == ConsoleKey.Enter)
-            {
-                Environment.Exit(0);
-            }
+            CheckInput();
         }
 
         private void SetUpGameOverGraphics()
@@ -32,17 +29,26 @@ namespace Tetris_CMD
             Console.Clear();
             Console.SetCursorPosition(Console.WindowWidth / 2 - 10,
                 Console.WindowHeight / 2 + 3);
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.Write(gameOverMsg);
+            
+
+            Thread.Sleep(2000);
         }
         private void DisplayStats()
         {
             Console.SetCursorPosition(Console.WindowWidth / 2 ,
                 Console.WindowHeight / 2 + 20);
-            Console.WriteLine($"Score = {scoreHandler.GetScore()}");
-            Console.WriteLine($"Level = {scoreHandler.GetLevel()}");
-            Console.WriteLine($"Linhas Destruídas = {scoreHandler.GetLines()}");
+            
+        }
+
+        private void CheckInput()
+        {
+            ConsoleKeyInfo k = Console.ReadKey(true);
+            if (k.Key == ConsoleKey.Enter)
+            {
+                Environment.Exit(0);
+            }
         }
 
         private string DefineRandomText(int value) { return gameOverTextOptions[value]; }
