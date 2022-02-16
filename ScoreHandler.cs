@@ -19,7 +19,7 @@ namespace Tetris_CMD
         public int Lines { get; set; }
 
         private SaveHandler saveHandler = new();
-
+        
         
         public void SetData(int score, int level, int line)
         {
@@ -45,21 +45,15 @@ namespace Tetris_CMD
         public void UpdateTitle(int score, int level, int line)
         {
 
-            Console.Title = $"          Tetris CMD                  PONTUAÇÃO:   {score}                PONTUAÇÃO: {level} ";
+            Console.Title = $" Tetris CMD                  PONTUAÇÃO:   {score}                Level: {level} ";
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition(72, 2); // 72, 2 topo direito
+            Console.SetCursorPosition(72, 2); // 72, 2 topo direito nessa ordem de janela
             Console.Write("Linhas Concluidas:" + line);
             Console.SetCursorPosition(72, 4);
             Console.Write("Level: " + level);
         }
 
-
-        public int GetScore() { return Score; }
-
-        public int GetLevel() { return Level; }
-
-        public int GetLines() { return Lines; }
 
     }
 
