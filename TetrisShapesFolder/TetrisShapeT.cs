@@ -40,7 +40,7 @@ namespace Tetris_CMD
         private static Primitives[,] TetrisShapeTForm_1()
         {
             Primitives[,] result = new Primitives[4, 4];
-            result[1, 0] = new Primitives(shapeColor);
+            result[1, 1] = new Primitives(shapeColor);
             result[2, 1] = new Primitives(shapeColor);
             result[2, 2] = new Primitives(shapeColor);
             result[3, 1] = new Primitives(shapeColor);
