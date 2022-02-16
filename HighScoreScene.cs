@@ -24,7 +24,7 @@ namespace Tetris_CMD
 
         public void SetUpScene()
         {
-            if (saveHandler.GetFileExists())
+            if (saveHandler.HasSaveFile())
             {
                 Console.Clear();
                 Console.WriteLine("Apertar Enter para voltar");

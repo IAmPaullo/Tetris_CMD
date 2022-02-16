@@ -12,12 +12,13 @@ namespace Tetris_CMD
         public const int boardWidth = 15;
 
         private int linesPerLvlAmount = 15;
+        private float dropSpeed = .45f;
         private int shapeAmount = 7;
         private int lines = 0;
         private int score = 0;
         private int level = 1;
         private int maxPiecesInRow = 15;
-        private float speed = 0.5f;
+        private float speed = 10f;
         private bool isFinished = false;
         public bool isHardMode;
         private Grid levelGrid;
@@ -56,8 +57,11 @@ namespace Tetris_CMD
                 currentShape = nextShape;
                 nextShape = new ObjectShape(levelGrid,
                     (ObjectShape.TetrisShape)(randValue.Next(0, shapeAmount)));
+                dropSpeed += 0.1f;
+                lines++;
             }
-            currentShape.MoveDownByTime(1);
+            
+            currentShape.MoveDownByTime(speed * dropSpeed);
         }
 
         public void DrawBoard()
@@ -149,7 +153,7 @@ namespace Tetris_CMD
                         currentShape.MoveDownByTime();
                         break;
 
-                    case ConsoleKey.Z:
+                    case ConsoleKey.Spacebar:
                         currentShape.RotatePiece();
                         break;
                 }
@@ -161,7 +165,7 @@ namespace Tetris_CMD
         {
 
             Console.SetCursorPosition(72, 8);
-            Console.Write("Proximo Tetraminó: ");
+            Console.Write("Próximo Tetraminó: ");
             nextShape.Draw(levelGrid.LeftValue + levelGrid.ColumnsValue + 3,
                 levelGrid.TopValue + levelGrid.RowValue / 3);
 

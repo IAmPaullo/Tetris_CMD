@@ -45,7 +45,7 @@ namespace Tetris_CMD
         public void UpdateTitle(int score, int level, int line)
         {
 
-            Console.Title = "          Tetris CMD " + "               PONTUAÇÃO: " + score;
+            Console.Title = $"          Tetris CMD                  PONTUAÇÃO:   {score}                PONTUAÇÃO: {level} ";
 
             Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(72, 2); // 72, 2 topo direito

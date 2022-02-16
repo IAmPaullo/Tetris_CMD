@@ -15,19 +15,21 @@ namespace Tetris_CMD
 
         public void SaveToTxt(int score, int level, int lines)
         {
+            if (!File.Exists(exePath))
+            {
+                DefaultCreateTxtFile();
+
+            }
 
             if (GetScoreFromSave() < score)
             {
-
                 try
                 {
-
                     StreamWriter sw = new(exePath);
                     sw.WriteLine($"Score = {score}");
                     sw.WriteLine($"Level = {level}");
                     sw.WriteLine($"Linhas Destruídas = {lines}");
                     sw.WriteLine(@$"Player: {Environment.UserName}");
-
                     sw.Close();
                 }
                 catch (Exception e)
@@ -40,64 +42,79 @@ namespace Tetris_CMD
                 }
             }
 
-        }
 
+
+        }
 
         public void LoadFromTxt()
         {
-            if (File.Exists(exePath))
+
+            try
             {
-                try
+                StreamReader sr = new(exePath);
+                string content = sr.ReadLine();
+
+                while (content != null)
                 {
-                    StreamReader sr = new(exePath);
-                    string content = sr.ReadLine();
+                    Console.WriteLine(content);
 
-                    while (content != null)
-                    {
-                        Console.WriteLine(content);
-
-                        content = sr.ReadLine();
-                    }
-
-
-
-                    sr.Close();
-                    Console.ReadLine();
+                    content = sr.ReadLine();
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+
+
+                sr.Close();
+                Console.ReadLine();
             }
-            
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+
         }
 
-        public bool GetFileExists()
+        private int GetScoreFromSave()
         {
-            if (File.Exists(exePath))
-                return true;
-            else
-                return false;
-        }
 
-        public int GetScoreFromSave()
-        {
-            int value;
+                int value;
+                string content = File.ReadLines(exePath).First();
 
-            string content = File.ReadLines(exePath).First();
-
-            string newContent = content.Substring(8);
+                string newContent = content.Substring(8);
 
 
-            value = int.Parse(newContent);
+                value = int.Parse(newContent);
 
-            Console.WriteLine(newContent);
-
+                Console.WriteLine(newContent);
 
 
             return value;
         }
 
+        private void DefaultCreateTxtFile()
+        {
+            try
+            {
+                StreamWriter sw = new(exePath);
+                sw.WriteLine($"Score = 0");
+                sw.WriteLine($"Level = 0");
+                sw.WriteLine($"Linhas Destruídas = 0");
+                sw.WriteLine(@$"Player: {Environment.UserName}");
+                sw.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Primeiro Arquivo Criado!");
+            }
+        }
+
+        public bool HasSaveFile()
+        {
+            return File.Exists(exePath);
+        }
 
     }
 }
