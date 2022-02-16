@@ -57,10 +57,10 @@ namespace Tetris_CMD
                 currentShape = nextShape;
                 nextShape = new ObjectShape(levelGrid,
                     (ObjectShape.TetrisShape)(randValue.Next(0, shapeAmount)));
-                dropSpeed += 0.1f;
-                lines++;
+                
+                
             }
-            
+            Console.WriteLine(dropSpeed);
             currentShape.MoveDownByTime(speed * dropSpeed);
         }
 
@@ -168,7 +168,6 @@ namespace Tetris_CMD
             Console.Write("Próximo Tetraminó: ");
             nextShape.Draw(levelGrid.LeftValue + levelGrid.ColumnsValue + 3,
                 levelGrid.TopValue + levelGrid.RowValue / 3);
-
         }
 
         public bool GameHasFinished()
@@ -210,8 +209,9 @@ namespace Tetris_CMD
                     if (piecesInRow == maxPiecesInRow)
                     {
                         levelGrid.DefineGameArea(ClearLineFormatGrid(row, levelGrid.GetPieceCellArea()));
-                        lines++;
                         level = scoreHandler.StatsManager(lines, linesPerLvlAmount, out score, level);
+                        lines++;
+                        dropSpeed += 0.2f;
                     }
 
                 }
